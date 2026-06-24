@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Comidas</title>
+<title>Restaurantes</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 :root{
@@ -12,17 +12,16 @@
   --accent:#E8622A;--green:#34C759;--red:#FF3B30;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding-bottom:40px}
 
 /* TOPBAR */
 .topbar{
   background:var(--surface);border-bottom:1px solid var(--border);
   padding:12px 16px;display:flex;align-items:center;gap:10px;
-  flex-shrink:0;
+  position:sticky;top:0;z-index:50;
 }
-.logo{font-size:18px;font-weight:700;letter-spacing:-.4px;flex-shrink:0}
-.search-wrap{flex:1;position:relative}
+.logo{font-size:17px;font-weight:700;letter-spacing:-.4px;flex-shrink:0}
+.search-wrap{flex:1;position:relative;min-width:0}
 .search-wrap input{
   width:100%;background:var(--surface2);border:none;border-radius:10px;
   padding:8px 12px 8px 32px;font-size:15px;color:var(--text);
@@ -33,17 +32,16 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .topbar-btns{display:flex;gap:6px;flex-shrink:0}
 .tbtn{
   background:var(--surface2);border:none;border-radius:10px;
-  padding:8px 12px;font-size:14px;font-weight:600;
+  padding:8px 11px;font-size:14px;font-weight:600;
   color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;
 }
-.tbtn-accent{background:var(--accent);color:#fff}
-.tbtn-icon{padding:8px 10px}
+.tbtn-accent{background:var(--accent);color:#fff;padding:8px 14px}
 
 /* CATEGORIES */
 .cats-row{
   display:flex;gap:8px;overflow-x:auto;padding:10px 16px;
   background:var(--surface);border-bottom:1px solid var(--border);
-  flex-shrink:0;
+  -webkit-overflow-scrolling:touch;
 }
 .cats-row::-webkit-scrollbar{display:none}
 .cat-pill{
@@ -51,116 +49,102 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   padding:7px 14px;border-radius:20px;
   border:1.5px solid var(--border);background:transparent;
   color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;
-  transition:all .15s;white-space:nowrap;
+  white-space:nowrap;
 }
 .cat-pill.active{color:#fff;border-color:transparent}
 
 /* FILTER BAR */
 .filter-bar{
-  display:flex;align-items:center;gap:8px;
-  padding:10px 16px;border-bottom:1px solid var(--border);
-  flex-shrink:0;overflow-x:auto;
+  display:flex;gap:8px;overflow-x:auto;padding:10px 16px;
+  border-bottom:1px solid var(--border);
+  -webkit-overflow-scrolling:touch;
 }
 .filter-bar::-webkit-scrollbar{display:none}
 .f-btn{
   flex-shrink:0;display:flex;align-items:center;gap:5px;
   background:var(--surface2);border:none;border-radius:10px;
-  padding:7px 12px;font-size:13px;font-weight:500;
+  padding:8px 13px;font-size:13px;font-weight:500;
   color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;
   white-space:nowrap;
 }
-.f-btn.has-filter{background:rgba(232,98,42,.15);color:var(--accent)}
-.f-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.f-btn.on{background:rgba(232,98,42,.15);color:var(--accent)}
+.f-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
 .f-clear{
   flex-shrink:0;background:none;border:none;
   font-size:13px;color:var(--text3);cursor:pointer;
-  font-family:'Inter',sans-serif;padding:7px 4px;
+  font-family:'Inter',sans-serif;padding:8px 4px;
 }
 
 /* LIST */
 .list-header{
   display:flex;align-items:center;justify-content:space-between;
-  padding:10px 16px 6px;flex-shrink:0;
+  padding:12px 16px 6px;
 }
 .list-count{font-size:13px;color:var(--text2)}
 .list-count strong{color:var(--text);font-weight:600}
 .sort-btn{
   background:none;border:none;font-size:13px;
   color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;
-  display:flex;align-items:center;gap:4px;
 }
 
-.list{flex:1;overflow-y:auto;padding:0 16px 100px}
-.list::-webkit-scrollbar{display:none}
-
-/* CARD */
+/* CARDS */
+.cards{padding:0 16px}
 .card{
   background:var(--surface);border-radius:14px;
   margin-bottom:10px;overflow:hidden;cursor:pointer;
   display:flex;border:1px solid var(--border);
-  active:opacity:.8;
 }
 .card:active{opacity:.7}
 .card-stripe{width:4px;flex-shrink:0}
 .card-body{flex:1;padding:13px 14px;min-width:0}
-.card-row1{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px}
+.card-row1{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:7px}
 .card-name{font-size:16px;font-weight:600;letter-spacing:-.3px;line-height:1.25}
 .card-badge{
   width:22px;height:22px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-size:12px;flex-shrink:0;margin-top:1px;
+  font-size:11px;flex-shrink:0;margin-top:2px;
 }
 .badge-v{background:var(--green);color:#fff}
 .badge-n{background:var(--surface2);color:var(--text3)}
-.card-cidade{font-size:12px;color:var(--text3);margin-bottom:6px}
 .card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
-.ctag{
-  font-size:12px;padding:3px 9px;border-radius:8px;
-  background:var(--surface2);color:var(--text2);
-}
+.ctag{font-size:12px;padding:3px 9px;border-radius:8px;background:var(--surface2);color:var(--text2)}
 .ctag-cidade{background:rgba(41,128,185,.18);color:#64AADF}
 .card-obs{font-size:12px;color:var(--text3);font-style:italic;margin-top:2px}
 .stars{display:flex;gap:1px;margin-top:6px}
 .star{font-size:14px;color:var(--text3)}
 .star.on{color:#F0A500}
-
-/* EMPTY */
-.empty{padding:60px 20px;text-align:center;color:var(--text3)}
-.empty-icon{font-size:36px;margin-bottom:12px;opacity:.4}
-
-/* DRAWER BACKDROP */
-.drawer-back{
-  position:fixed;inset:0;background:rgba(0,0,0,.6);
-  z-index:100;opacity:0;transition:opacity .25s;
-  backdrop-filter:blur(4px);
-}
-.drawer-back.show{opacity:1}
+.empty{padding:60px 20px;text-align:center;color:var(--text3);font-size:15px}
 
 /* DRAWER */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:100;display:none;
+  backdrop-filter:blur(4px);
+}
+.overlay.show{display:block}
 .drawer{
   position:fixed;bottom:0;left:0;right:0;
   background:var(--surface);border-radius:20px 20px 0 0;
   border-top:1px solid var(--border);
-  z-index:101;padding:0 0 40px;
-  transform:translateY(100%);transition:transform .3s cubic-bezier(.32,1,.23,1);
+  z-index:101;
   max-height:88vh;display:flex;flex-direction:column;
+  transform:translateY(100%);transition:transform .3s cubic-bezier(.32,1,.23,1);
 }
 .drawer.show{transform:translateY(0)}
-.drawer-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0}
-.drawer-title{font-size:17px;font-weight:700;padding:16px 20px 12px;border-bottom:1px solid var(--border)}
-.drawer-body{overflow-y:auto;padding:16px 20px;flex:1}
+.drawer-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 4px;flex-shrink:0}
+.drawer-title{font-size:17px;font-weight:700;padding:12px 20px;border-bottom:1px solid var(--border);flex-shrink:0}
+.drawer-body{overflow-y:auto;padding:16px 20px;flex:1;-webkit-overflow-scrolling:touch}
 .drawer-body::-webkit-scrollbar{display:none}
 .d-section{margin-bottom:20px}
-.d-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.d-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
 .d-chips{display:flex;flex-wrap:wrap;gap:8px}
 .dchip{
-  font-size:14px;font-weight:500;padding:8px 16px;border-radius:22px;
+  font-size:14px;font-weight:500;padding:9px 16px;border-radius:22px;
   border:1.5px solid var(--border);background:transparent;
   color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;
-  transition:all .15s;
 }
 .dchip.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.drawer-actions{display:flex;gap:10px;padding:12px 20px 0;border-top:1px solid var(--border);flex-shrink:0}
+.drawer-footer{display:flex;gap:10px;padding:12px 20px 36px;border-top:1px solid var(--border);flex-shrink:0}
 .d-act{
   flex:1;padding:13px;border-radius:13px;font-size:15px;font-weight:600;
   cursor:pointer;font-family:'Inter',sans-serif;border:none;
@@ -168,23 +152,23 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 }
 .d-act-primary{background:var(--accent);color:#fff}
 
-/* MODAL (add/edit) */
-.modal-back{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;backdrop-filter:blur(4px)}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:none;backdrop-filter:blur(4px)}
+.modal-overlay.show{display:block}
 .modal{
   position:fixed;bottom:0;left:0;right:0;
   background:var(--surface);border-radius:20px 20px 0 0;
-  border-top:1px solid var(--border);
-  z-index:201;padding:0;
+  border-top:1px solid var(--border);z-index:201;
   max-height:92vh;display:flex;flex-direction:column;
   transform:translateY(100%);transition:transform .3s cubic-bezier(.32,1,.23,1);
 }
 .modal.show{transform:translateY(0)}
-.modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0;flex-shrink:0}
-.modal-title{font-size:17px;font-weight:700;padding:16px 20px 12px;border-bottom:1px solid var(--border);flex-shrink:0}
-.modal-scroll{overflow-y:auto;padding:16px 20px;flex:1}
-.modal-scroll::-webkit-scrollbar{display:none}
+.modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 4px;flex-shrink:0}
+.modal-title{font-size:17px;font-weight:700;padding:12px 20px;border-bottom:1px solid var(--border);flex-shrink:0}
+.modal-body{overflow-y:auto;padding:16px 20px;flex:1;-webkit-overflow-scrolling:touch}
+.modal-body::-webkit-scrollbar{display:none}
 .mfield{margin-bottom:16px}
-.mfield label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);display:block;margin-bottom:7px}
+.mfield label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);display:block;margin-bottom:8px}
 .mfield input,.mfield select,.mfield textarea{
   width:100%;background:var(--surface2);border:1.5px solid var(--border);
   border-radius:12px;color:var(--text);padding:11px 14px;
@@ -195,7 +179,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .mfield select option{background:var(--surface2)}
 .mchips{display:flex;flex-wrap:wrap;gap:8px}
 .mchip{
-  font-size:14px;font-weight:500;padding:8px 16px;border-radius:22px;
+  font-size:14px;font-weight:500;padding:9px 16px;border-radius:22px;
   border:1.5px solid var(--border);background:transparent;
   color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;
 }
@@ -204,92 +188,68 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .mstars{display:flex;gap:10px}
 .mstar{font-size:30px;cursor:pointer;color:var(--text3)}
 .mstar.on{color:#F0A500}
-.modal-footer{flex-shrink:0;padding:12px 20px 40px;border-top:1px solid var(--border);display:flex;gap:10px}
-.m-act{
-  flex:1;padding:14px;border-radius:13px;font-size:16px;font-weight:600;
-  cursor:pointer;font-family:'Inter',sans-serif;border:none;
-  background:var(--surface2);color:var(--text2);
-}
+.modal-footer{flex-shrink:0;padding:12px 20px 36px;border-top:1px solid var(--border);display:flex;gap:10px}
+.m-act{flex:1;padding:14px;border-radius:13px;font-size:16px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;border:none;background:var(--surface2);color:var(--text2)}
 .m-act-primary{background:var(--accent);color:#fff}
-.m-act-danger{background:rgba(255,59,48,.12);color:var(--red)}
+.m-act-danger{background:rgba(255,59,48,.1);color:var(--red)}
 .cidade-sugs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.csug{
-  font-size:13px;padding:5px 12px;border-radius:12px;
-  background:var(--surface2);color:var(--text2);cursor:pointer;border:none;
-  font-family:'Inter',sans-serif;
-}
+.csug{font-size:13px;padding:5px 12px;border-radius:12px;background:var(--surface2);color:var(--text2);cursor:pointer;border:none;font-family:'Inter',sans-serif}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
-  <div class="logo">🍽 Comidas</div>
+  <div class="logo">🍽 Restaurantes</div>
   <div class="search-wrap">
     <span class="s-icon">⌕</span>
     <input type="text" id="search" placeholder="Buscar..." autocomplete="off">
   </div>
   <div class="topbar-btns">
-    <button class="tbtn tbtn-accent" onclick="openAdd()">+</button>
-    <button class="tbtn tbtn-icon" onclick="exportJSON()">↓</button>
-    <label class="tbtn tbtn-icon" style="cursor:pointer">↑<input type="file" accept=".json" style="display:none" onchange="importJSON(event)"></label>
+    <button class="tbtn tbtn-accent" onclick="openAdd()">+ Novo</button>
+    <button class="tbtn" onclick="exportJSON()" title="Exportar">↓</button>
+    <label class="tbtn" style="cursor:pointer" title="Importar">↑<input type="file" accept=".json" style="display:none" onchange="importJSON(event)"></label>
   </div>
 </div>
 
-<!-- CATEGORIES -->
 <div class="cats-row" id="cats-row"></div>
-
-<!-- FILTER BAR -->
 <div class="filter-bar" id="filter-bar"></div>
 
-<!-- LIST HEADER -->
 <div class="list-header">
   <div class="list-count" id="list-count"></div>
   <button class="sort-btn" onclick="cycleSort()">↕ <span id="sort-lbl">A–Z</span></button>
 </div>
 
-<!-- LIST -->
-<div class="list" id="list"></div>
+<div class="cards" id="cards"></div>
 
 <!-- FILTER DRAWER -->
-<div class="drawer-back" id="drawer-back" onclick="closeDrawer()"></div>
+<div class="overlay" id="overlay" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-handle"></div>
-  <div class="drawer-title">Filtros</div>
+  <div class="drawer-title" id="drawer-title">Filtros</div>
   <div class="drawer-body" id="drawer-body"></div>
-  <div class="drawer-actions">
-    <button class="d-act" onclick="clearFilters()">Limpar</button>
+  <div class="drawer-footer">
+    <button class="d-act" onclick="clearAllFilters()">Limpar tudo</button>
     <button class="d-act d-act-primary" onclick="closeDrawer()">Ver resultados</button>
   </div>
 </div>
 
 <!-- MODAL ADD/EDIT -->
-<div class="modal-back" id="modal-back" style="display:none" onclick="closeModal()"></div>
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
 <div class="modal" id="modal">
   <div class="modal-handle"></div>
   <div class="modal-title" id="modal-title"></div>
-  <div class="modal-scroll" id="modal-scroll"></div>
+  <div class="modal-body" id="modal-body"></div>
   <div class="modal-footer" id="modal-footer"></div>
 </div>
 
 <script>
-// ─── CONSTANTS ────────────────────────────────────────────────────────────────
 const CATS=["Pizzas","Hamburgueria","Sushi/Japonês","Restaurantes","Bares","Café/Padaria","Delivery","Sobremesa"];
 const CAT_COLOR={"Pizzas":"#E8622A","Hamburgueria":"#C0392B","Sushi/Japonês":"#2980B9","Restaurantes":"#8E44AD","Bares":"#D4AC0D","Café/Padaria":"#27AE60","Delivery":"#E67E22","Sobremesa":"#E91E8C"};
 const PERIODOS=["café/brunch","almoço","jantar","ambos"];
 const VIBES=["casual","animado","romântico","bar diurno","bar noturno","especial"];
 const OCASIOES=["amigos","encontro","família"];
 const PRECOS=["$","$$","$$$"];
-const FILTER_GROUPS=[
-  {key:"cidade",label:"Cidade",opts:()=>getCidades()},
-  {key:"status",label:"Status",opts:()=>["visitado","a visitar"]},
-  {key:"periodo",label:"Período",opts:()=>PERIODOS},
-  {key:"vibe",label:"Vibe",opts:()=>VIBES},
-  {key:"ocasiao",label:"Ocasião",opts:()=>OCASIOES},
-  {key:"preco",label:"Preço",opts:()=>PRECOS},
-];
 
-// ─── DATA ─────────────────────────────────────────────────────────────────────
 const DEFAULT=[
   {n:"Braz",c:"Pizzas",cidade:"São Paulo",v:true,r:4,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
   {n:"Veridiana",c:"Pizzas",cidade:"São Paulo",v:true,r:4,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
@@ -478,7 +438,6 @@ const DEFAULT=[
   {n:"Mirá Padaria",c:"Sobremesa",cidade:"São Paulo",v:false,r:0,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
 ];
 
-// ─── STATE ────────────────────────────────────────────────────────────────────
 const KEY='comidas_v4';
 let data=JSON.parse(localStorage.getItem(KEY)||'null')||DEFAULT.map((d,i)=>({...d,id:i}));
 data.forEach(r=>{
@@ -489,30 +448,33 @@ data.forEach(r=>{
   if(r.obs===undefined)r.obs='';
 });
 let nextId=Math.max(0,...data.map(r=>r.id||0))+1;
-let tab='Todos';
-let filters={cidade:[],status:[],periodo:[],vibe:[],ocasiao:[],preco:[]};
-let search='';
-let sort='az';
-let editId=null;
-let drawerOpen=false;
+let tab='Todos',filters={cidade:[],status:[],periodo:[],vibe:[],ocasiao:[],preco:[]};
+let search='',sort='az',editId=null;
+
+const FILTER_GROUPS=[
+  {key:'cidade',label:'Cidade',opts:()=>getCidades()},
+  {key:'status',label:'Status',opts:()=>['visitado','a visitar']},
+  {key:'periodo',label:'Período',opts:()=>PERIODOS},
+  {key:'vibe',label:'Vibe',opts:()=>VIBES},
+  {key:'ocasiao',label:'Ocasião',opts:()=>OCASIOES},
+  {key:'preco',label:'Preço',opts:()=>PRECOS},
+];
 
 function save(){localStorage.setItem(KEY,JSON.stringify(data));}
 function getCidades(){return[...new Set(data.map(r=>r.cidade||'São Paulo'))].sort();}
 function esc(s){return String(s).replace(/'/g,"\\'");}
+function filterCount(){return Object.values(filters).reduce((s,a)=>s+a.length,0);}
 
-// ─── EXPORT/IMPORT ────────────────────────────────────────────────────────────
 function exportJSON(){
   const b=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(b);
-  a.download='comidas_backup.json';a.click();
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='restaurantes_backup.json';a.click();
 }
 function importJSON(e){
   const f=e.target.files[0];if(!f)return;
   const r=new FileReader();
   r.onload=ev=>{
     try{
-      const d=JSON.parse(ev.target.result);
-      if(!Array.isArray(d))throw 0;
+      const d=JSON.parse(ev.target.result);if(!Array.isArray(d))throw 0;
       data=d;
       data.forEach(r=>{
         if(!r.cidade)r.cidade='São Paulo';
@@ -528,85 +490,72 @@ function importJSON(e){
   r.readAsText(f);e.target.value='';
 }
 
-// ─── CATEGORIES ───────────────────────────────────────────────────────────────
+// CATEGORIES
 function buildCats(){
   const el=document.getElementById('cats-row');
-  const cats=['Todos',...CATS];
-  el.innerHTML=cats.map(c=>{
+  el.innerHTML=['Todos',...CATS].map(c=>{
     const color=CAT_COLOR[c]||'#555';
     const active=tab===c;
     return`<button class="cat-pill${active?' active':''}"
       style="${active?`background:${color};border-color:${color}`:''}"
-      onclick="setTab('${c}')">${c}</button>`;
+      onclick="setTab('${esc(c)}')">${c}</button>`;
   }).join('');
 }
 function setTab(t){tab=t;buildCats();render();}
 
-// ─── FILTER BAR ───────────────────────────────────────────────────────────────
-function hasFilter(){return Object.values(filters).some(a=>a.length>0);}
-function filterCount(){return Object.values(filters).reduce((s,a)=>s+a.length,0);}
-
+// FILTER BAR
 function buildFilterBar(){
   const el=document.getElementById('filter-bar');
   const cnt=filterCount();
-  const groups=FILTER_GROUPS.map(g=>{
-    const active=filters[g.key].length>0;
-    const label=active?`${g.label} (${filters[g.key].length})`:g.label;
-    return`<button class="f-btn${active?' has-filter':''}" onclick="openDrawer('${g.key}')">
-      ${active?'<span class="f-dot"></span>':''}${label}
+  el.innerHTML=FILTER_GROUPS.map(g=>{
+    const n=filters[g.key].length;
+    return`<button class="f-btn${n?'  on':''}" onclick="openDrawer('${g.key}')">
+      ${n?'<span class="f-dot"></span>':''}${g.label}${n?` (${n})`:''}
     </button>`;
-  }).join('');
-  el.innerHTML=groups+(cnt>0?`<button class="f-clear" onclick="clearFilters()">✕ Limpar</button>`:'');
+  }).join('')+(cnt?`<button class="f-clear" onclick="clearAllFilters()">✕ Limpar</button>`:'');
 }
 
-// ─── DRAWER ───────────────────────────────────────────────────────────────────
+// DRAWER
 let drawerKey=null;
 function openDrawer(key){
   drawerKey=key;
-  buildDrawer();
-  document.getElementById('drawer-back').classList.add('show');
+  const g=FILTER_GROUPS.find(x=>x.key===key);
+  document.getElementById('drawer-title').textContent=g?g.label:'Filtros';
+  buildDrawerBody();
+  document.getElementById('overlay').classList.add('show');
   document.getElementById('drawer').classList.add('show');
-  drawerOpen=true;
 }
 function closeDrawer(){
-  document.getElementById('drawer-back').classList.remove('show');
+  document.getElementById('overlay').classList.remove('show');
   document.getElementById('drawer').classList.remove('show');
-  drawerOpen=false;
   buildFilterBar();render();
 }
-function clearFilters(){
+function clearAllFilters(){
   Object.keys(filters).forEach(k=>filters[k]=[]);
-  buildDrawer();buildFilterBar();render();
+  buildDrawerBody();buildFilterBar();render();
 }
-function buildDrawer(){
-  const body=document.getElementById('drawer-body');
-  body.innerHTML=FILTER_GROUPS.map(g=>{
-    const opts=g.opts();
-    return`<div class="d-section">
-      <div class="d-label">${g.label}</div>
-      <div class="d-chips">${opts.map(o=>`
-        <span class="dchip${filters[g.key].includes(o)?' on':''}"
-          onclick="toggleFilter('${g.key}','${esc(o)}')">${o}</span>`).join('')}
-      </div>
+function buildDrawerBody(){
+  const g=FILTER_GROUPS.find(x=>x.key===drawerKey);
+  if(!g)return;
+  document.getElementById('drawer-body').innerHTML=`
+    <div class="d-chips">${g.opts().map(o=>`
+      <span class="dchip${filters[g.key].includes(o)?' on':''}" onclick="toggleF('${g.key}','${esc(o)}')">${o}</span>`).join('')}
     </div>`;
-  }).join('');
 }
-function toggleFilter(key,val){
-  const a=filters[key];
-  const i=a.indexOf(val);
+function toggleF(key,val){
+  const a=filters[key],i=a.indexOf(val);
   if(i>-1)a.splice(i,1);else a.push(val);
-  buildDrawer();
+  buildDrawerBody();
 }
 
-// ─── FILTER LOGIC ─────────────────────────────────────────────────────────────
+// FILTER + RENDER
 function filtered(){
   return data.filter(r=>{
     if(tab!=='Todos'&&r.c!==tab)return false;
     if(search&&!r.n.toLowerCase().includes(search.toLowerCase()))return false;
     if(filters.cidade.length&&!filters.cidade.includes(r.cidade||'São Paulo'))return false;
     if(filters.status.length){
-      const wV=filters.status.includes('visitado');
-      const wA=filters.status.includes('a visitar');
+      const wV=filters.status.includes('visitado'),wA=filters.status.includes('a visitar');
       if(wV&&!wA&&!r.v)return false;
       if(wA&&!wV&&r.v)return false;
     }
@@ -617,30 +566,21 @@ function filtered(){
     return true;
   });
 }
-function sortData(list){
-  return [...list].sort((a,b)=>{
-    if(sort==='az')return a.n.localeCompare(b.n,'pt');
-    if(sort==='za')return b.n.localeCompare(a.n,'pt');
-    if(sort==='rating')return(b.r||0)-(a.r||0);
-    return 0;
-  });
-}
 function cycleSort(){
   sort=sort==='az'?'za':sort==='za'?'rating':'az';
   document.getElementById('sort-lbl').textContent=sort==='az'?'A–Z':sort==='za'?'Z–A':'Nota';
   render();
 }
-
-// ─── RENDER ───────────────────────────────────────────────────────────────────
 function render(){
-  const list=sortData(filtered());
+  const list=[...filtered()].sort((a,b)=>{
+    if(sort==='az')return a.n.localeCompare(b.n,'pt');
+    if(sort==='za')return b.n.localeCompare(a.n,'pt');
+    return(b.r||0)-(a.r||0);
+  });
   const cnt=list.length;
   document.getElementById('list-count').innerHTML=`<strong>${cnt}</strong> lugar${cnt!==1?'es':''}`;
-  const el=document.getElementById('list');
-  if(!cnt){
-    el.innerHTML=`<div class="empty"><div class="empty-icon">🍽</div><p>Nenhum lugar encontrado.</p></div>`;
-    return;
-  }
+  const el=document.getElementById('cards');
+  if(!cnt){el.innerHTML=`<div class="empty">Nenhum lugar encontrado.</div>`;return;}
   el.innerHTML=list.map(r=>{
     const cc=CAT_COLOR[r.c]||'#555';
     const tags=[...r.periodo,...r.vibe,...r.ocasiao,r.preco];
@@ -661,41 +601,32 @@ function render(){
   }).join('');
 }
 
-// ─── MODAL ────────────────────────────────────────────────────────────────────
+// MODAL
 function openAdd(){showModal(null);}
 function openEdit(id){showModal(data.find(r=>r.id===id));}
-
 function showModal(r){
   const isNew=!r;
   editId=isNew?null:r.id;
-  const d=r||{n:'',c:'Restaurantes',cidade:'São Paulo',v:false,r:0,
-    periodo:['jantar'],vibe:['casual'],ocasiao:['amigos'],preco:'$$',obs:''};
+  const d=r||{n:'',c:'Restaurantes',cidade:'São Paulo',v:false,r:0,periodo:['jantar'],vibe:['casual'],ocasiao:['amigos'],preco:'$$',obs:''};
   window._md={...d,periodo:[...d.periodo],vibe:[...d.vibe],ocasiao:[...d.ocasiao]};
-
   document.getElementById('modal-title').textContent=isNew?'Novo lugar':'Editar lugar';
-
   const cids=getCidades();
-  document.getElementById('modal-scroll').innerHTML=`
+  document.getElementById('modal-body').innerHTML=`
     <div class="mfield"><label>Nome</label>
       <input id="m-n" value="${d.n.replace(/"/g,'&quot;')}" placeholder="Nome do restaurante"></div>
     <div class="mfield"><label>Categoria</label>
       <select id="m-c">${CATS.map(c=>`<option${c===d.c?' selected':''}>${c}</option>`).join('')}</select></div>
     <div class="mfield"><label>Cidade</label>
       <input id="m-cidade" value="${d.cidade||'São Paulo'}" placeholder="São Paulo" oninput="updCidSugs(this.value)">
-      <div class="cidade-sugs" id="cid-sugs">${cids.map(c=>`<button class="csug" onclick="setCid('${esc(c)}')">${c}</button>`).join('')}</div>
-    </div>
+      <div class="cidade-sugs" id="cid-sugs">${cids.map(c=>`<button class="csug" onclick="setCid('${esc(c)}')">${c}</button>`).join('')}</div></div>
     <div class="mfield"><label>Período</label>
-      <div class="mchips">${PERIODOS.map(o=>`<span class="mchip${d.periodo.includes(o)?' sel-m':''}"
-        data-f="periodo" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
+      <div class="mchips">${PERIODOS.map(o=>`<span class="mchip${d.periodo.includes(o)?' sel-m':''}" data-f="periodo" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
     <div class="mfield"><label>Vibe</label>
-      <div class="mchips">${VIBES.map(o=>`<span class="mchip${d.vibe.includes(o)?' sel-m':''}"
-        data-f="vibe" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
+      <div class="mchips">${VIBES.map(o=>`<span class="mchip${d.vibe.includes(o)?' sel-m':''}" data-f="vibe" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
     <div class="mfield"><label>Ocasião</label>
-      <div class="mchips">${OCASIOES.map(o=>`<span class="mchip${d.ocasiao.includes(o)?' sel-m':''}"
-        data-f="ocasiao" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
+      <div class="mchips">${OCASIOES.map(o=>`<span class="mchip${d.ocasiao.includes(o)?' sel-m':''}" data-f="ocasiao" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
     <div class="mfield"><label>Preço</label>
-      <div class="mchips">${PRECOS.map(o=>`<span class="mchip${d.preco===o?' sel':''}"
-        data-f="preco" data-v="${o}" onclick="togS(this)">${o}</span>`).join('')}</div></div>
+      <div class="mchips">${PRECOS.map(o=>`<span class="mchip${d.preco===o?' sel':''}" data-f="preco" data-v="${o}" onclick="togS(this)">${o}</span>`).join('')}</div></div>
     <div class="mfield"><label>Visitado?</label>
       <div class="mchips">
         <span class="mchip${d.v?' sel':''}" data-f="v" data-v="true" onclick="togS(this)">Sim ✓</span>
@@ -705,21 +636,17 @@ function showModal(r){
       <div class="mstars">${[1,2,3,4,5].map(s=>`<span class="mstar${s<=(d.r||0)?' on':''}" onclick="setStars(${s})">★</span>`).join('')}</div></div>
     <div class="mfield"><label>Observação</label>
       <textarea id="m-obs" placeholder="ex: pedir a burrata, só com reserva...">${d.obs||''}</textarea></div>`;
-
   document.getElementById('modal-footer').innerHTML=
     (!isNew?`<button class="m-act m-act-danger" onclick="delPlace(${d.id})">Excluir</button>`:'')
     +`<button class="m-act" onclick="closeModal()" style="${isNew?'margin-left:auto':''}">Cancelar</button>
     <button class="m-act m-act-primary" onclick="saveModal()">${isNew?'Adicionar':'Salvar'}</button>`;
-
-  document.getElementById('modal-back').style.display='block';
+  document.getElementById('modal-overlay').classList.add('show');
   setTimeout(()=>document.getElementById('modal').classList.add('show'),10);
-  setTimeout(()=>document.getElementById('m-n').focus(),300);
+  setTimeout(()=>document.getElementById('m-n').focus(),350);
 }
-
 function togM(el){
   const f=el.dataset.f,v=el.dataset.v,arr=window._md[f];
-  const i=arr.indexOf(v);
-  if(i>-1)arr.splice(i,1);else arr.push(v);
+  const i=arr.indexOf(v);if(i>-1)arr.splice(i,1);else arr.push(v);
   el.classList.toggle('sel-m',arr.includes(v));
 }
 function togS(el){
@@ -742,33 +669,27 @@ function updCidSugs(val){
 }
 function closeModal(){
   document.getElementById('modal').classList.remove('show');
-  setTimeout(()=>{document.getElementById('modal-back').style.display='none';},300);
+  document.getElementById('modal-overlay').classList.remove('show');
 }
 function saveModal(){
-  const nome=document.getElementById('m-n').value.trim();
-  if(!nome)return;
+  const nome=document.getElementById('m-n').value.trim();if(!nome)return;
   const md=window._md;
-  const obj={
-    n:nome,c:document.getElementById('m-c').value,
+  const obj={n:nome,c:document.getElementById('m-c').value,
     cidade:document.getElementById('m-cidade').value.trim()||'São Paulo',
     v:md.v===true||md.v==='true',r:md.r||0,
     periodo:md.periodo.length?md.periodo:['jantar'],
     vibe:md.vibe.length?md.vibe:['casual'],
     ocasiao:md.ocasiao.length?md.ocasiao:['amigos'],
-    preco:md.preco||'$$',
-    obs:document.getElementById('m-obs').value.trim(),
-  };
+    preco:md.preco||'$$',obs:document.getElementById('m-obs').value.trim()};
   if(editId===null){obj.id=nextId++;data.push(obj);}
   else{const i=data.findIndex(r=>r.id===editId);if(i>-1)data[i]={...data[i],...obj};}
   save();closeModal();buildAll();
 }
 function delPlace(id){
-  if(!confirm('Excluir este lugar?'))return;
-  data=data.filter(r=>r.id!==id);
-  save();closeModal();buildAll();
+  if(!confirm('Excluir?'))return;
+  data=data.filter(r=>r.id!==id);save();closeModal();buildAll();
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
 function buildAll(){buildCats();buildFilterBar();render();}
 document.getElementById('search').addEventListener('input',e=>{search=e.target.value;render();});
 buildAll();

@@ -9,52 +9,61 @@
 :root{
   --bg:#111;--surface:#1C1C1E;--surface2:#2C2C2E;--border:#3A3A3C;
   --text:#F2F2F7;--text2:#8E8E93;--text3:#48484A;
-  --accent:#E8622A;--green:#34C759;--red:#FF3B30;
+  --accent:#E8622A;--green:#34C759;--red:#FF3B30;--gold:#F0A500;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding-bottom:48px}
+
 .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;gap:10px}
-.logo{font-size:17px;font-weight:700;letter-spacing:-.4px;display:flex;align-items:center;gap:7px}
-.topbar-right{display:flex;gap:8px;align-items:center}
+.logo{font-size:17px;font-weight:700;letter-spacing:-.4px}
+.topbar-right{display:flex;gap:8px}
 .tbtn{background:var(--surface2);border:none;border-radius:10px;padding:8px 14px;font-size:14px;font-weight:600;color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif}
 .tbtn-accent{background:var(--accent);color:#fff}
+
 .search-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:8px 16px}
 .search-wrap{position:relative}
 .search-wrap input{width:100%;background:var(--surface2);border:none;border-radius:10px;padding:10px 14px 10px 36px;font-size:15px;color:var(--text);font-family:'Inter',sans-serif;outline:none}
 .search-wrap input::placeholder{color:var(--text3)}
 .s-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:17px;pointer-events:none}
-.cats-section{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 16px}
-.cats-wrap{display:flex;flex-wrap:wrap;gap:7px}
-.cat-pill{font-size:13px;font-weight:600;padding:7px 14px;border-radius:20px;border:1.5px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
-.cat-pill.active{color:#fff;border-color:transparent}
-.filters-section{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 16px}
-.filters-wrap{display:flex;flex-wrap:wrap;gap:7px}
+
+.section-pills{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 16px}
+.pills-wrap{display:flex;flex-wrap:wrap;gap:7px}
+.pill{font-size:13px;font-weight:600;padding:7px 14px;border-radius:20px;border:1.5px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
+.pill.active{color:#fff;border-color:transparent}
 .f-btn{display:flex;align-items:center;gap:5px;background:var(--surface2);border:none;border-radius:10px;padding:8px 13px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
 .f-btn.on{background:rgba(232,98,42,.15);color:var(--accent)}
 .f-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
 .f-clear{background:none;border:none;font-size:13px;color:var(--text3);cursor:pointer;font-family:'Inter',sans-serif;padding:8px 4px}
+
 .list-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 6px}
 .list-count{font-size:13px;color:var(--text2)}
 .list-count strong{color:var(--text);font-weight:600}
 .sort-btn{background:none;border:none;font-size:13px;color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif}
+
 .cards{padding:0 16px}
-.card{background:var(--surface);border-radius:14px;margin-bottom:10px;overflow:hidden;cursor:pointer;display:flex;border:1px solid var(--border)}
+.card{background:var(--surface);border-radius:14px;margin-bottom:10px;overflow:hidden;cursor:pointer;display:flex;border:1px solid var(--border);transition:border-color .15s}
 .card:active{opacity:.7}
+.card.priority{border-color:var(--accent);border-width:2px}
 .card-stripe{width:4px;flex-shrink:0}
 .card-body{flex:1;padding:13px 14px;min-width:0}
 .card-row1{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:7px}
-.card-name{font-size:16px;font-weight:600;letter-spacing:-.3px;line-height:1.25}
-.card-badge{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:2px}
-.badge-v{background:var(--green);color:#fff}
-.badge-n{background:var(--surface2);color:var(--text3)}
-.card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.card-name{font-size:16px;font-weight:600;letter-spacing:-.3px;line-height:1.25;display:flex;align-items:center;gap:6px}
+.priority-icon{color:var(--accent);font-size:13px;flex-shrink:0}
+.card-right{display:flex;align-items:center;gap:6px;flex-shrink:0;margin-top:2px}
+.card-score{font-size:13px;font-weight:700;color:var(--gold)}
+.card-status-pills{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:6px}
+.spill{font-size:11px;padding:2px 7px;border-radius:6px;font-weight:500}
+.spill-foi{background:rgba(52,199,89,.15);color:#34C759}
+.spill-quer{background:rgba(232,98,42,.12);color:var(--accent)}
+.spill-volta{background:rgba(240,165,0,.15);color:var(--gold)}
+.spill-nao{background:rgba(255,59,48,.12);color:var(--red)}
+.card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px}
 .ctag{font-size:12px;padding:3px 9px;border-radius:8px;background:var(--surface2);color:var(--text2)}
-.ctag-cidade{background:rgba(41,128,185,.18);color:#64AADF}
-.card-obs{font-size:12px;color:var(--text3);font-style:italic;margin-top:2px}
-.stars{display:flex;gap:1px;margin-top:6px}
-.star{font-size:14px;color:var(--text3)}
-.star.on{color:#F0A500}
+.ctag-tipo{background:rgba(41,128,185,.15);color:#64AADF}
+.ctag-cidade{background:rgba(142,68,173,.15);color:#C39BD3}
+.card-obs{font-size:12px;color:var(--text3);font-style:italic;margin-top:4px}
 .empty{padding:60px 20px;text-align:center;color:var(--text3);font-size:15px}
+
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;display:none;backdrop-filter:blur(4px)}
 .overlay.show{display:block}
 .drawer{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-radius:20px 20px 0 0;border-top:1px solid var(--border);z-index:101;max-height:85vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,1,.23,1)}
@@ -69,13 +78,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);paddi
 .drawer-footer{display:flex;gap:10px;padding:14px 20px 36px;border-top:1px solid var(--border);flex-shrink:0}
 .d-act{flex:1;padding:13px;border-radius:13px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;border:none;background:var(--surface2);color:var(--text2)}
 .d-act-primary{background:var(--accent);color:#fff}
+
 .menu-drawer{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-radius:20px 20px 0 0;border-top:1px solid var(--border);z-index:101;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,1,.23,1)}
 .menu-drawer.show{transform:translateY(0)}
 .menu-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 8px}
 .menu-item{display:flex;align-items:center;gap:14px;padding:16px 24px;border:none;background:none;font-family:'Inter',sans-serif;font-size:16px;font-weight:500;color:var(--text);cursor:pointer;text-align:left;width:100%;border-top:1px solid var(--border)}
 .menu-item:first-of-type{border-top:none}
-.menu-item-icon{font-size:20px;width:28px;text-align:center}
 .menu-spacer{height:36px}
+
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:none;backdrop-filter:blur(4px)}
 .modal-overlay.show{display:block}
 .modal{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-radius:20px 20px 0 0;border-top:1px solid var(--border);z-index:201;max-height:92vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,1,.23,1)}
@@ -94,9 +104,16 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);paddi
 .mchip{font-size:14px;font-weight:500;padding:9px 16px;border-radius:22px;border:1.5px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif}
 .mchip.sel{background:var(--accent);border-color:var(--accent);color:#fff}
 .mchip.sel-m{border-color:var(--accent);color:var(--accent);background:rgba(232,98,42,.12)}
-.mstars{display:flex;gap:10px}
-.mstar{font-size:30px;cursor:pointer;color:var(--text3)}
-.mstar.on{color:#F0A500}
+.score-wrap{display:flex;align-items:center;gap:12px}
+.score-slider{flex:1;-webkit-appearance:none;height:6px;border-radius:3px;background:var(--surface2);outline:none}
+.score-slider::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);cursor:pointer}
+.score-val{font-size:20px;font-weight:700;color:var(--gold);min-width:28px;text-align:center}
+.priority-toggle{display:flex;align-items:center;gap:12px;background:var(--surface2);border-radius:12px;padding:12px 16px;cursor:pointer;border:1.5px solid var(--border)}
+.priority-toggle.on{border-color:var(--accent);background:rgba(232,98,42,.1)}
+.priority-toggle-label{font-size:15px;font-weight:500;color:var(--text2);flex:1}
+.priority-toggle.on .priority-toggle-label{color:var(--text)}
+.priority-toggle-icon{font-size:20px}
+.vibe-free{margin-top:8px}
 .modal-footer{flex-shrink:0;padding:12px 20px 36px;border-top:1px solid var(--border);display:flex;gap:10px}
 .m-act{flex:1;padding:14px;border-radius:13px;font-size:16px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;border:none;background:var(--surface2);color:var(--text2)}
 .m-act-primary{background:var(--accent);color:#fff}
@@ -122,17 +139,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);paddi
   </div>
 </div>
 
-<div class="cats-section">
-  <div class="cats-wrap" id="cats-wrap"></div>
+<div class="section-pills">
+  <div class="pills-wrap" id="cats-wrap"></div>
 </div>
 
-<div class="filters-section">
-  <div class="filters-wrap" id="filters-wrap"></div>
+<div class="section-pills" style="border-top:none">
+  <div class="pills-wrap" id="filters-wrap"></div>
 </div>
 
 <div class="list-header">
   <div class="list-count" id="list-count"></div>
-  <button class="sort-btn" onclick="cycleSort()">↕ <span id="sort-lbl">A–Z</span></button>
+  <button class="sort-btn" onclick="cycleSort()">↕ <span id="sort-lbl">Prioridade</span></button>
 </div>
 
 <div class="cards" id="cards"></div>
@@ -151,11 +168,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);paddi
 <div class="overlay" id="menu-overlay" onclick="closeMenu()"></div>
 <div class="menu-drawer" id="menu-drawer">
   <div class="menu-handle"></div>
-  <button class="menu-item" onclick="exportJSON();closeMenu()">
-    <span class="menu-item-icon">↓</span> Exportar backup (.json)
-  </button>
-  <label class="menu-item" style="cursor:pointer">
-    <span class="menu-item-icon">↑</span> Importar backup (.json)
+  <button class="menu-item" onclick="exportJSON();closeMenu()">↓ Exportar backup (.json)</button>
+  <label class="menu-item" style="cursor:pointer">↑ Importar backup (.json)
     <input type="file" accept=".json" style="display:none" onchange="importJSON(event);closeMenu()">
   </label>
   <div class="menu-spacer"></div>
@@ -170,224 +184,279 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);paddi
 </div>
 
 <script>
-const CATS=["Pizzas","Hamburgueria","Sushi/Japonês","Restaurantes","Bares","Café/Padaria","Delivery","Sobremesa"];
-const CAT_COLOR={"Pizzas":"#E8622A","Hamburgueria":"#C0392B","Sushi/Japonês":"#2980B9","Restaurantes":"#8E44AD","Bares":"#D4AC0D","Café/Padaria":"#27AE60","Delivery":"#E67E22","Sobremesa":"#E91E8C"};
-const PERIODOS=["café/brunch","almoço","jantar","ambos"];
-const VIBES=["casual","animado","romântico","bar diurno","bar noturno","especial"];
-const OCASIOES=["amigos","encontro","família"];
-const PRECOS=["$","$$","$$$"];
-const FILTER_GROUPS=[
-  {key:'cidade',label:'Cidade',opts:()=>getCidades()},
-  {key:'status',label:'Status',opts:()=>['visitado','a visitar']},
-  {key:'periodo',label:'Período',opts:()=>PERIODOS},
-  {key:'vibe',label:'Vibe',opts:()=>VIBES},
-  {key:'ocasiao',label:'Ocasião',opts:()=>OCASIOES},
-  {key:'preco',label:'Preço',opts:()=>PRECOS},
-];
+const CATS=["Pizza","Hambúrguer","Massa","Frutos do mar","Japonês","Asiático","Carnes","Bar & Boteco","Café & Padaria","Sobremesa","Delivery","Outros"];
+const CAT_COLOR={"Pizza":"#E8622A","Hambúrguer":"#C0392B","Massa":"#8E44AD","Frutos do mar":"#2980B9","Japonês":"#E74C3C","Asiático":"#C0392B","Carnes":"#7D3C98","Bar & Boteco":"#D4AC0D","Café & Padaria":"#27AE60","Sobremesa":"#E91E8C","Delivery":"#E67E22","Outros":"#555"};
+const TIPOS=["Restaurante","Bar & Boteco","Bar sofisticado","Café","Delivery","Take away"];
+const VIBES_DEFAULT=["Casual","Animado","Date","Romântico","Boteco","Ocasião especial"];
+const COMPANHIAS=["Solo","A dois","Turma","Família"];
+const PRECOS=["Barato","Bom preço","Mid","Caro","Muito caro"];
+const STATUS_OPTS=["Quero conhecer","Já fui","Quero voltar","Não voltaria"];
+const STATUS_STYLE={"Quero conhecer":"spill-quer","Já fui":"spill-foi","Quero voltar":"spill-volta","Não voltaria":"spill-nao"};
+
+// migrate old vibe
+function migrateVibe(v){
+  if(!v)return["Casual"];
+  const m={"casual":"Casual","animado":"Animado","romântico":"Romântico","bar diurno":"Boteco","bar noturno":"Animado","especial":"Ocasião especial","romantico":"Romântico"};
+  if(Array.isArray(v))return[...new Set(v.map(x=>m[x]||x))];
+  return[m[v]||v];
+}
+function migrateCat(c){
+  const m={"Pizzas":"Pizza","Hamburgueria":"Hambúrguer","Sushi/Japonês":"Japonês","Restaurantes":"Outros","Bares":"Bar & Boteco","Café/Padaria":"Café & Padaria","Delivery":"Delivery","Sobremesa":"Sobremesa"};
+  return m[c]||c;
+}
+function migrateTipo(c){
+  const m={"Bares":"Bar & Boteco","Café/Padaria":"Café","Delivery":"Delivery"};
+  return m[c]||"Restaurante";
+}
+function migratePreco(p){
+  const m={"$":"Barato","$$":"Bom preço","$$$":"Caro"};
+  return m[p]||p||"Bom preço";
+}
+function migrateStatus(r){
+  if(r.status)return r.status;
+  return r.v?["Já fui"]:["Quero conhecer"];
+}
+function migrateCompanhia(o){
+  if(Array.isArray(o)){
+    const m={"amigos":"Turma","encontro":"A dois","família":"Família","familia":"Família"};
+    return[...new Set(o.map(x=>m[x]||x))];
+  }
+  return["Turma"];
+}
 
 const DEFAULT=[
-  {n:"Braz",c:"Pizzas",cidade:"São Paulo",v:true,r:4,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Veridiana",c:"Pizzas",cidade:"São Paulo",v:true,r:4,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"1900",c:"Pizzas",cidade:"São Paulo",v:true,r:4,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"La Braciera",c:"Pizzas",cidade:"São Paulo",v:true,r:5,periodo:["jantar"],vibe:["especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Carlos",c:"Pizzas",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Pizza da Mooca",c:"Pizzas",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Leggera",c:"Pizzas",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"QT Pizza",c:"Pizzas",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Divina Increnca",c:"Pizzas",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Piccola Fattoria",c:"Pizzas",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Unica Pizzeria",c:"Pizzas",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Vito's",c:"Pizzas",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Umberto",c:"Pizzas",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Cabana",c:"Hamburgueria",cidade:"São Paulo",v:true,r:4,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Z Deli",c:"Hamburgueria",cidade:"São Paulo",v:true,r:5,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"E ai burguer",c:"Hamburgueria",cidade:"São Paulo",v:true,r:4,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Notorious Fish",c:"Hamburgueria",cidade:"São Paulo",v:false,r:0,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Patties",c:"Hamburgueria",cidade:"São Paulo",v:true,r:4,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Forno SP",c:"Hamburgueria",cidade:"São Paulo",v:false,r:0,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Pão com Carne",c:"Hamburgueria",cidade:"São Paulo",v:true,r:4,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Holy Burguer",c:"Hamburgueria",cidade:"São Paulo",v:false,r:0,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Buzina",c:"Hamburgueria",cidade:"São Paulo",v:false,r:0,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Chimi Parrilla",c:"Hamburgueria",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Grindhouse",c:"Hamburgueria",cidade:"São Paulo",v:false,r:0,periodo:["almoço","jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Fat Cow",c:"Hamburgueria",cidade:"São Paulo",v:true,r:4,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Gurumê",c:"Sushi/Japonês",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Tatá Sushi",c:"Sushi/Japonês",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Kuromoon",c:"Sushi/Japonês",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado","especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Myiabi",c:"Sushi/Japonês",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Saiko Sandô",c:"Sushi/Japonês",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Makoto",c:"Sushi/Japonês",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Mokutan",c:"Sushi/Japonês",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Standing Sushi Bar",c:"Sushi/Japonês",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Kotori",c:"Sushi/Japonês",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Maza",c:"Sushi/Japonês",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Adega Santiago",c:"Restaurantes",cidade:"São Paulo",v:true,r:5,periodo:["jantar"],vibe:["romântico","especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Sal",c:"Restaurantes",cidade:"São Paulo",v:true,r:4,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"ICI Brasserie",c:"Restaurantes",cidade:"São Paulo",v:true,r:4,periodo:["almoço","jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Modern Mamma",c:"Restaurantes",cidade:"São Paulo",v:true,r:4,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Fazenda Churrascada",c:"Restaurantes",cidade:"São Paulo",v:true,r:4,periodo:["almoço"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Tuy Cocina",c:"Restaurantes",cidade:"São Paulo",v:true,r:4,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Giu Giu",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Due Cuochi",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["romântico"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Mila",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["romântico"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Zucco",c:"Restaurantes",cidade:"São Paulo",v:true,r:5,periodo:["jantar"],vibe:["romântico","especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Piselli",c:"Restaurantes",cidade:"São Paulo",v:true,r:4,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Così",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Piú",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Nelita",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"deBetti",c:"Restaurantes",cidade:"São Paulo",v:true,r:4,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"El Tranvia",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Nice to meat you",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Arturito",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Baru Marisqueria",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["romântico"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Cais",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["romântico"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Tanit",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Tasca da Esquina",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"A Casa de Antonia",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Insalata",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Locale",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Ristorantino",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Barbacoa",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Fogo de Chão",c:"Restaurantes",cidade:"São Paulo",v:true,r:4,periodo:["almoço"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Temperani Cucina",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Lolla Osteria",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Donna",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Carlota",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["romântico"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Jacarandá",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Bosco",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Cora",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Esther Rooftop",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado","especial"],ocasiao:["amigos"],preco:"$$$",obs:""},
-  {n:"Il Carpaccio",c:"Restaurantes",cidade:"São Paulo",v:true,r:5,periodo:["jantar"],vibe:["romântico","especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Il Capitale",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["romântico"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Bottega Bernacca",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Ella Fitz",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Nonna Rosa",c:"Restaurantes",cidade:"São Paulo",v:true,r:4,periodo:["jantar"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Aguzzo",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Altruísta",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"TasteIT",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Da Marino",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Teus",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Votre",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["romântico"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Meet&Eat",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"De Segunda",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Fuego Celeste",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Cru Oyster Bar",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado","especial"],ocasiao:["amigos"],preco:"$$$",obs:""},
-  {n:"Temperani Amalfi",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Piccini",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Cór Gastronomia",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Pappagallo",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"La cura",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:"parme"},
-  {n:"Hospedaria",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:"parme"},
-  {n:"Braz Trattoria",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Pittaya",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:"quilo"},
-  {n:"Osteria Generale",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:"quilo"},
-  {n:"Fornô",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Le Napoleon",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["romântico"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"La Piana",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Jardim Churrascada",c:"Restaurantes",cidade:"São Paulo",v:true,r:4,periodo:["almoço"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Gianni",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Giulietta",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Cozinha dos Ferrari",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Los Dos Cantina",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Parrillita Carnes",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Tappo",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Bistrot de Paris",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["romântico"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Bodega Pepito",c:"Restaurantes",cidade:"São Paulo",v:true,r:4,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"D' Heaven",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Basq",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Donna di Nico",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Tordesilhas",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Mocotó",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Fiaschetteria",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Lina",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Maialino panino",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Casemiro",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Madonna Cucina",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Midi Forneria",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Le Freak",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Elea Forneria",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Jojo",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Parigi CJ",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Ecco",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Marie Cuisine",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Basco",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Casa Rios",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Olea salada",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Pipo",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Amazo",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Solar da República",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Fuoco&Farina",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Baio Cozinha Sulista",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Confraria do Sabor",c:"Restaurantes",cidade:"Campos do Jordão",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["família"],preco:"$$",obs:""},
-  {n:"Laranjeiras Braseiro",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Azur do Mar",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["romântico"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Tonton",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Cena",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["especial"],ocasiao:["encontro"],preco:"$$$",obs:""},
-  {n:"Marquise Ibirapuera",c:"Restaurantes",cidade:"São Paulo",v:false,r:0,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Veloso",c:"Bares",cidade:"São Paulo",v:true,r:5,periodo:["jantar"],vibe:["bar diurno","bar noturno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Caledonia",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar noturno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Cavo",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar noturno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Pirajá",c:"Bares",cidade:"São Paulo",v:true,r:4,periodo:["jantar"],vibe:["bar diurno","bar noturno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Caracol",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Sarjeta",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Singelo Braseiro",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Orfeu",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Basq",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Kazuo",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["café/brunch"],vibe:["casual"],ocasiao:["amigos"],preco:"$$",obs:"brunch"},
-  {n:"Palermo",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Bar Europa",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Taberna 474",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Quintal de Primeira",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"The Liquor Store",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar noturno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Cellar Cave",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar noturno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Broca",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Lita Wine Bar",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["romântico"],ocasiao:["encontro"],preco:"$$",obs:""},
-  {n:"Flora Bar",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Varal",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Bar dos Arcos",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Megusta Bar",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"De Primeira Botequim",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Isca",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Lágrima",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Fel",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"The Parlor",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar noturno"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Santana bar",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Bar dos Cravos",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["bar diurno"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Eximia",c:"Bares",cidade:"São Paulo",v:false,r:0,periodo:["jantar"],vibe:["animado"],ocasiao:["amigos"],preco:"$$",obs:""},
-  {n:"Fabrique",c:"Café/Padaria",cidade:"São Paulo",v:true,r:5,periodo:["café/brunch","almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Mintchi",c:"Café/Padaria",cidade:"São Paulo",v:true,r:4,periodo:["café/brunch","almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"IZA",c:"Café/Padaria",cidade:"São Paulo",v:false,r:0,periodo:["café/brunch","almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Le Jazz Boulangerie",c:"Café/Padaria",cidade:"São Paulo",v:false,r:0,periodo:["café/brunch","almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Le Blé",c:"Café/Padaria",cidade:"São Paulo",v:false,r:0,periodo:["café/brunch","almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Kio Bakehouse",c:"Café/Padaria",cidade:"São Paulo",v:false,r:0,periodo:["café/brunch","almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Joya Boulangerie",c:"Café/Padaria",cidade:"São Paulo",v:false,r:0,periodo:["café/brunch","almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Casa Fabri",c:"Café/Padaria",cidade:"São Paulo",v:false,r:0,periodo:["café/brunch","almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Mimada Café",c:"Café/Padaria",cidade:"São Paulo",v:false,r:0,periodo:["café/brunch","almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Nexo",c:"Café/Padaria",cidade:"São Paulo",v:false,r:0,periodo:["café/brunch","almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:"take away"},
-  {n:"Brim",c:"Café/Padaria",cidade:"São Paulo",v:false,r:0,periodo:["café/brunch","almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"A Galeteria",c:"Delivery",cidade:"São Paulo",v:true,r:5,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Seu Osnir",c:"Delivery",cidade:"São Paulo",v:true,r:4,periodo:["almoço"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Tartelier",c:"Sobremesa",cidade:"São Paulo",v:false,r:0,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Estou Quituteria",c:"Sobremesa",cidade:"São Paulo",v:true,r:4,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
-  {n:"Bachir",c:"Sobremesa",cidade:"São Paulo",v:true,r:5,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:"sorvete árabe"},
-  {n:"Mirá Padaria",c:"Sobremesa",cidade:"São Paulo",v:false,r:0,periodo:["almoço","jantar"],vibe:["casual"],ocasiao:["amigos"],preco:"$",obs:""},
+  {n:"Braz",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Veridiana",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"1900",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"La Braciera",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:["jantar"],vibe:["Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:true,vibeCustom:""},
+  {n:"Carlos",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Pizza da Mooca",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Leggera",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"QT Pizza",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Divina Increnca",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Piccola Fattoria",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Unica Pizzeria",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Vito's",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Umberto",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Cabana",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Z Deli",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:true,vibeCustom:""},
+  {n:"E ai burguer",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Notorious Fish",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Patties",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Forno SP",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Pão com Carne",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Holy Burguer",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Buzina",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Chimi Parrilla",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Grindhouse",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço","jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Fat Cow",c:"Hambúrguer",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Gurumê",c:"Japonês",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Tatá Sushi",c:"Japonês",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Kuromoon",c:"Japonês",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado","Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Myiabi",c:"Japonês",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Saiko Sandô",c:"Japonês",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Makoto",c:"Japonês",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Mokutan",c:"Japonês",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Standing Sushi Bar",c:"Japonês",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Kotori",c:"Japonês",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Maza",c:"Japonês",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Adega Santiago",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:["jantar"],vibe:["Romântico","Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:true,vibeCustom:""},
+  {n:"Sal",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"ICI Brasserie",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço","jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Modern Mamma",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Fazenda Churrascada",c:"Carnes",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Tuy Cocina",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Giu Giu",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Due Cuochi",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Romântico"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Mila",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Romântico"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Zucco",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:["jantar"],vibe:["Romântico","Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:true,vibeCustom:""},
+  {n:"Piselli",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Così",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Piú",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Nelita",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"deBetti",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"El Tranvia",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Nice to meat you",c:"Carnes",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Arturito",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Baru Marisqueria",c:"Frutos do mar",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Romântico"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Cais",c:"Frutos do mar",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Romântico"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Tanit",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Tasca da Esquina",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"A Casa de Antonia",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Insalata",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Locale",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Ristorantino",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Barbacoa",c:"Carnes",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Fogo de Chão",c:"Carnes",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Temperani Cucina",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Lolla Osteria",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Donna",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Carlota",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Romântico"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Jacarandá",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Bosco",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Cora",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Esther Rooftop",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado","Ocasião especial"],companhia:["Turma"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Il Carpaccio",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:["jantar"],vibe:["Romântico","Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:true,vibeCustom:""},
+  {n:"Il Capitale",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Romântico"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Bottega Bernacca",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Ella Fitz",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Nonna Rosa",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["jantar"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Aguzzo",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Altruísta",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"TasteIT",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Da Marino",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Teus",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Votre",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Romântico"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Meet&Eat",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"De Segunda",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Fuego Celeste",c:"Carnes",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Cru Oyster Bar",c:"Frutos do mar",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado","Ocasião especial"],companhia:["Turma"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Temperani Amalfi",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Piccini",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Cór Gastronomia",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Pappagallo",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"La cura",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"parme",priority:false,vibeCustom:""},
+  {n:"Hospedaria",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"parme",priority:false,vibeCustom:""},
+  {n:"Braz Trattoria",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Pittaya",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"quilo",priority:false,vibeCustom:""},
+  {n:"Osteria Generale",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"quilo",priority:false,vibeCustom:""},
+  {n:"Fornô",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Le Napoleon",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Romântico"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"La Piana",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Jardim Churrascada",c:"Carnes",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Gianni",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Giulietta",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Cozinha dos Ferrari",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Los Dos Cantina",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Parrillita Carnes",c:"Carnes",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Tappo",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Bistrot de Paris",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Romântico"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Bodega Pepito",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"D' Heaven",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Basq",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Donna di Nico",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Tordesilhas",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Mocotó",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Fiaschetteria",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Lina",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Maialino panino",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Casemiro",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Madonna Cucina",c:"Massa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Midi Forneria",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Le Freak",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Elea Forneria",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Jojo",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Parigi CJ",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Ecco",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Marie Cuisine",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Basco",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Casa Rios",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Olea salada",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Pipo",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Amazo",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Solar da República",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Fuoco&Farina",c:"Pizza",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Baio Cozinha Sulista",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Confraria do Sabor",c:"Outros",tipo:"Restaurante",cidade:"Campos do Jordão",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Família"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Laranjeiras Braseiro",c:"Carnes",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Azur do Mar",c:"Frutos do mar",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Romântico"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Tonton",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Cena",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Ocasião especial"],companhia:["A dois"],preco:"Caro",obs:"",priority:false,vibeCustom:""},
+  {n:"Marquise Ibirapuera",c:"Outros",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Veloso",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:true,vibeCustom:""},
+  {n:"Caledonia",c:"Bar & Boteco",tipo:"Bar sofisticado",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Cavo",c:"Bar & Boteco",tipo:"Bar sofisticado",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Pirajá",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Caracol",c:"Bar & Boteco",tipo:"Bar sofisticado",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Sarjeta",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Singelo Braseiro",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Orfeu",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Basq",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Kazuo",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["café/brunch"],vibe:["Casual"],companhia:["Turma"],preco:"Bom preço",obs:"brunch",priority:false,vibeCustom:""},
+  {n:"Palermo",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Bar Europa",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Taberna 474",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Quintal de Primeira",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"The Liquor Store",c:"Bar & Boteco",tipo:"Bar sofisticado",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Cellar Cave",c:"Bar & Boteco",tipo:"Bar sofisticado",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Broca",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Lita Wine Bar",c:"Bar & Boteco",tipo:"Bar sofisticado",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Romântico"],companhia:["A dois"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Flora Bar",c:"Bar & Boteco",tipo:"Bar sofisticado",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Varal",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Bar dos Arcos",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Megusta Bar",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"De Primeira Botequim",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Isca",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Lágrima",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Fel",c:"Bar & Boteco",tipo:"Bar sofisticado",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"The Parlor",c:"Bar & Boteco",tipo:"Bar sofisticado",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Santana bar",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Bar dos Cravos",c:"Bar & Boteco",tipo:"Bar & Boteco",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Boteco"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Eximia",c:"Bar & Boteco",tipo:"Bar sofisticado",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["jantar"],vibe:["Animado"],companhia:["Turma"],preco:"Bom preço",obs:"",priority:false,vibeCustom:""},
+  {n:"Fabrique",c:"Café & Padaria",tipo:"Café",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Mintchi",c:"Café & Padaria",tipo:"Café",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"IZA",c:"Café & Padaria",tipo:"Café",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Le Jazz Boulangerie",c:"Café & Padaria",tipo:"Café",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Le Blé",c:"Café & Padaria",tipo:"Café",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Kio Bakehouse",c:"Café & Padaria",tipo:"Café",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Joya Boulangerie",c:"Café & Padaria",tipo:"Café",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Casa Fabri",c:"Café & Padaria",tipo:"Café",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Mimada Café",c:"Café & Padaria",tipo:"Café",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Nexo",c:"Café & Padaria",tipo:"Take away",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"take away",priority:false,vibeCustom:""},
+  {n:"Brim",c:"Café & Padaria",tipo:"Café",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"A Galeteria",c:"Delivery",tipo:"Delivery",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Seu Osnir",c:"Delivery",tipo:"Delivery",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Tartelier",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Estou Quituteria",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Bachir",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"sorvete árabe",priority:false,vibeCustom:""},
+  {n:"Mirá Padaria",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
 ];
 
-const KEY='comidas_v4';
-let data=JSON.parse(localStorage.getItem(KEY)||'null')||DEFAULT.map((d,i)=>({...d,id:i}));
+const KEY='comidas_v6';
+let data=JSON.parse(localStorage.getItem(KEY)||'null');
+if(!data){
+  // try migrate from v4
+  const old=JSON.parse(localStorage.getItem('comidas_v4')||'null');
+  if(old){
+    data=old.map(r=>({
+      n:r.n,
+      c:migrateCat(r.c),
+      tipo:migrateTipo(r.c),
+      cidade:r.cidade||'São Paulo',
+      status:migrateStatus(r),
+      r:Math.min(10,(r.r||0)*2),
+      periodo:Array.isArray(r.periodo)?r.periodo:[r.periodo||'jantar'],
+      vibe:migrateVibe(r.vibe),
+      vibeCustom:'',
+      companhia:migrateCompanhia(r.ocasiao),
+      preco:migratePreco(r.preco),
+      obs:r.obs||'',
+      priority:r.priority||false,
+      id:r.id,
+    }));
+  } else {
+    data=DEFAULT.map((d,i)=>({...d,id:i}));
+  }
+}
 data.forEach(r=>{
   if(!r.cidade)r.cidade='São Paulo';
   if(!Array.isArray(r.periodo))r.periodo=[r.periodo||'jantar'];
-  if(!Array.isArray(r.vibe))r.vibe=[r.vibe||'casual'];
-  if(!Array.isArray(r.ocasiao))r.ocasiao=[r.ocasiao||'amigos'];
+  if(!Array.isArray(r.vibe))r.vibe=['Casual'];
+  if(!Array.isArray(r.companhia))r.companhia=['Turma'];
+  if(!Array.isArray(r.status))r.status=['Quero conhecer'];
   if(r.obs===undefined)r.obs='';
+  if(r.vibeCustom===undefined)r.vibeCustom='';
+  if(r.priority===undefined)r.priority=false;
+  if(r.tipo===undefined)r.tipo='Restaurante';
+  if(!r.preco)r.preco='Bom preço';
 });
 let nextId=Math.max(0,...data.map(r=>r.id||0))+1;
-let tab='Todos',filters={cidade:[],status:[],periodo:[],vibe:[],ocasiao:[],preco:[]};
-let search='',sort='az',editId=null,drawerKey=null;
+let tab='Todos',filters={cidade:[],status:[],periodo:[],vibe:[],companhia:[],preco:[],tipo:[]};
+let search='',sort='priority',editId=null,drawerKey=null;
 
 function save(){localStorage.setItem(KEY,JSON.stringify(data));}
 function getCidades(){return[...new Set(data.map(r=>r.cidade||'São Paulo'))].sort();}
+function getVibes(){return[...new Set([...VIBES_DEFAULT,...data.flatMap(r=>r.vibe||[]),...data.map(r=>r.vibeCustom).filter(Boolean)])].sort();}
 function esc(s){return String(s).replace(/'/g,"\\'");}
 function filterCount(){return Object.values(filters).reduce((s,a)=>s+a.length,0);}
 
@@ -404,10 +473,15 @@ function importJSON(e){
       data=d;
       data.forEach(r=>{
         if(!r.cidade)r.cidade='São Paulo';
-        if(!Array.isArray(r.periodo))r.periodo=[r.periodo||'jantar'];
-        if(!Array.isArray(r.vibe))r.vibe=[r.vibe||'casual'];
-        if(!Array.isArray(r.ocasiao))r.ocasiao=[r.ocasiao||'amigos'];
+        if(!Array.isArray(r.periodo))r.periodo=['jantar'];
+        if(!Array.isArray(r.vibe))r.vibe=['Casual'];
+        if(!Array.isArray(r.companhia))r.companhia=['Turma'];
+        if(!Array.isArray(r.status))r.status=['Quero conhecer'];
         if(r.obs===undefined)r.obs='';
+        if(r.vibeCustom===undefined)r.vibeCustom='';
+        if(r.priority===undefined)r.priority=false;
+        if(r.tipo===undefined)r.tipo='Restaurante';
+        if(!r.preco)r.preco='Bom preço';
       });
       nextId=Math.max(0,...data.map(r=>r.id||0))+1;
       save();buildAll();alert('Importado! '+d.length+' lugares.');
@@ -416,21 +490,24 @@ function importJSON(e){
   r.readAsText(f);e.target.value='';
 }
 
-function openMenu(){
-  document.getElementById('menu-overlay').classList.add('show');
-  document.getElementById('menu-drawer').classList.add('show');
-}
-function closeMenu(){
-  document.getElementById('menu-overlay').classList.remove('show');
-  document.getElementById('menu-drawer').classList.remove('show');
-}
+function openMenu(){document.getElementById('menu-overlay').classList.add('show');document.getElementById('menu-drawer').classList.add('show');}
+function closeMenu(){document.getElementById('menu-overlay').classList.remove('show');document.getElementById('menu-drawer').classList.remove('show');}
 document.getElementById('menu-overlay').onclick=closeMenu;
+
+const FILTER_GROUPS=[
+  {key:'cidade',label:'Cidade',opts:()=>getCidades()},
+  {key:'status',label:'Status',opts:()=>STATUS_OPTS},
+  {key:'periodo',label:'Período',opts:()=>['café/brunch','almoço','jantar','ambos']},
+  {key:'vibe',label:'Vibe',opts:()=>getVibes()},
+  {key:'companhia',label:'Companhia',opts:()=>COMPANHIAS},
+  {key:'tipo',label:'Tipo',opts:()=>TIPOS},
+  {key:'preco',label:'Preço',opts:()=>PRECOS},
+];
 
 function buildCats(){
   document.getElementById('cats-wrap').innerHTML=['Todos',...CATS].map(c=>{
-    const color=CAT_COLOR[c]||'#555';
-    const active=tab===c;
-    return`<button class="cat-pill${active?' active':''}" style="${active?`background:${color};border-color:${color}`:''}" onclick="setTab('${esc(c)}')">${c}</button>`;
+    const color=CAT_COLOR[c]||'#555';const active=tab===c;
+    return`<button class="pill${active?' active':''}" style="${active?`background:${color};border-color:${color}`:''}" onclick="setTab('${esc(c)}')">${c}</button>`;
   }).join('');
 }
 function setTab(t){tab=t;buildCats();render();}
@@ -438,8 +515,7 @@ function setTab(t){tab=t;buildCats();render();}
 function buildFilters(){
   const cnt=filterCount();
   document.getElementById('filters-wrap').innerHTML=
-    FILTER_GROUPS.map(g=>{
-      const n=filters[g.key].length;
+    FILTER_GROUPS.map(g=>{const n=filters[g.key].length;
       return`<button class="f-btn${n?' on':''}" onclick="openDrawer('${g.key}')">
         ${n?'<span class="f-dot"></span>':''}${g.label}${n?` (${n})`:''}
       </button>`;
@@ -472,41 +548,57 @@ function filtered(){
     if(tab!=='Todos'&&r.c!==tab)return false;
     if(search&&!r.n.toLowerCase().includes(search.toLowerCase()))return false;
     if(filters.cidade.length&&!filters.cidade.includes(r.cidade||'São Paulo'))return false;
-    if(filters.status.length){
-      const wV=filters.status.includes('visitado'),wA=filters.status.includes('a visitar');
-      if(wV&&!wA&&!r.v)return false;
-      if(wA&&!wV&&r.v)return false;
-    }
+    if(filters.status.length&&!filters.status.some(f=>r.status.includes(f)))return false;
     if(filters.periodo.length&&!filters.periodo.some(f=>r.periodo.includes(f)))return false;
-    if(filters.vibe.length&&!filters.vibe.some(f=>r.vibe.includes(f)))return false;
-    if(filters.ocasiao.length&&!filters.ocasiao.some(f=>r.ocasiao.includes(f)))return false;
+    if(filters.vibe.length&&!filters.vibe.some(f=>[...r.vibe,r.vibeCustom].includes(f)))return false;
+    if(filters.companhia.length&&!filters.companhia.some(f=>r.companhia.includes(f)))return false;
+    if(filters.tipo.length&&!filters.tipo.includes(r.tipo))return false;
     if(filters.preco.length&&!filters.preco.includes(r.preco))return false;
     return true;
   });
 }
+
 function cycleSort(){
-  sort=sort==='az'?'za':sort==='za'?'rating':'az';
-  document.getElementById('sort-lbl').textContent=sort==='az'?'A–Z':sort==='za'?'Z–A':'Nota';
+  const modes=['priority','az','za','rating'];
+  const labels={priority:'Prioridade',az:'A–Z',za:'Z–A',rating:'Nota'};
+  const i=modes.indexOf(sort);
+  sort=modes[(i+1)%modes.length];
+  document.getElementById('sort-lbl').textContent=labels[sort];
   render();
 }
+
 function render(){
-  const list=[...filtered()].sort((a,b)=>sort==='az'?a.n.localeCompare(b.n,'pt'):sort==='za'?b.n.localeCompare(a.n,'pt'):(b.r||0)-(a.r||0));
+  const list=[...filtered()].sort((a,b)=>{
+    if(sort==='priority'){if(b.priority!==a.priority)return b.priority?1:-1;return(b.r||0)-(a.r||0);}
+    if(sort==='az')return a.n.localeCompare(b.n,'pt');
+    if(sort==='za')return b.n.localeCompare(a.n,'pt');
+    return(b.r||0)-(a.r||0);
+  });
   const cnt=list.length;
   document.getElementById('list-count').innerHTML=`<strong>${cnt}</strong> lugar${cnt!==1?'es':''}`;
   const el=document.getElementById('cards');
   if(!cnt){el.innerHTML=`<div class="empty">Nenhum lugar encontrado.</div>`;return;}
   el.innerHTML=list.map(r=>{
     const cc=CAT_COLOR[r.c]||'#555';
-    const tags=[...r.periodo,...r.vibe,...r.ocasiao,r.preco];
+    const allVibes=[...r.vibe,r.vibeCustom].filter(Boolean);
+    const statusHtml=r.status.map(s=>`<span class="spill ${STATUS_STYLE[s]||''}">${s}</span>`).join('');
+    const scoreHtml=r.r?`<span class="card-score">${r.r}/10</span>`:'';
     const cidTag=r.cidade&&r.cidade!=='São Paulo'?`<span class="ctag ctag-cidade">${r.cidade}</span>`:'';
-    const stars=r.v&&r.r?`<div class="stars">${[1,2,3,4,5].map(i=>`<span class="star${i<=r.r?' on':''}">★</span>`).join('')}</div>`:'';
-    return`<div class="card" onclick="openEdit(${r.id})">
+    const tags=[...r.periodo,...allVibes,...r.companhia,r.preco];
+    return`<div class="card${r.priority?' priority':''}" onclick="openEdit(${r.id})">
       <div class="card-stripe" style="background:${cc}"></div>
       <div class="card-body">
-        <div class="card-row1"><div class="card-name">${r.n}</div><div class="card-badge ${r.v?'badge-v':'badge-n'}">${r.v?'✓':'·'}</div></div>
-        <div class="card-tags">${tags.map(t=>`<span class="ctag">${t}</span>`).join('')}${cidTag}</div>
+        <div class="card-row1">
+          <div class="card-name">${r.priority?'<span class="priority-icon">★</span>':''} ${r.n}</div>
+          <div class="card-right">${scoreHtml}</div>
+        </div>
+        <div class="card-status-pills">${statusHtml}</div>
+        <div class="card-tags">
+          <span class="ctag ctag-tipo">${r.tipo}</span>
+          ${tags.map(t=>`<span class="ctag">${t}</span>`).join('')}
+          ${cidTag}
+        </div>
         ${r.obs?`<div class="card-obs">${r.obs}</div>`:''}
-        ${stars}
       </div>
     </div>`;
   }).join('');
@@ -517,25 +609,34 @@ function openEdit(id){showModal(data.find(r=>r.id===id));}
 function showModal(r){
   const isNew=!r;
   editId=isNew?null:r.id;
-  const d=r||{n:'',c:'Restaurantes',cidade:'São Paulo',v:false,r:0,periodo:['jantar'],vibe:['casual'],ocasiao:['amigos'],preco:'$$',obs:''};
-  window._md={...d,periodo:[...d.periodo],vibe:[...d.vibe],ocasiao:[...d.ocasiao]};
+  const d=r||{n:'',c:'Outros',tipo:'Restaurante',cidade:'São Paulo',status:['Quero conhecer'],r:0,periodo:['jantar'],vibe:['Casual'],vibeCustom:'',companhia:['Turma'],preco:'Bom preço',obs:'',priority:false};
+  window._md={...d,status:[...d.status],periodo:[...d.periodo],vibe:[...d.vibe],companhia:[...d.companhia]};
   document.getElementById('modal-title').textContent=isNew?'Novo lugar':'Editar lugar';
   const cids=getCidades();
+  const vibesAll=getVibes();
   document.getElementById('modal-body').innerHTML=`
     <div class="mfield"><label>Nome</label><input id="m-n" value="${d.n.replace(/"/g,'&quot;')}" placeholder="Nome do restaurante"></div>
     <div class="mfield"><label>Categoria</label><select id="m-c">${CATS.map(c=>`<option${c===d.c?' selected':''}>${c}</option>`).join('')}</select></div>
+    <div class="mfield"><label>Tipo de lugar</label><div class="mchips">${TIPOS.map(o=>`<span class="mchip${d.tipo===o?' sel':''}" data-f="tipo" data-v="${esc(o)}" onclick="togS(this)">${o}</span>`).join('')}</div></div>
     <div class="mfield"><label>Cidade</label>
       <input id="m-cidade" value="${d.cidade||'São Paulo'}" placeholder="São Paulo" oninput="updCidSugs(this.value)">
       <div class="cidade-sugs" id="cid-sugs">${cids.map(c=>`<button class="csug" onclick="setCid('${esc(c)}')">${c}</button>`).join('')}</div></div>
-    <div class="mfield"><label>Período</label><div class="mchips">${PERIODOS.map(o=>`<span class="mchip${d.periodo.includes(o)?' sel-m':''}" data-f="periodo" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
-    <div class="mfield"><label>Vibe</label><div class="mchips">${VIBES.map(o=>`<span class="mchip${d.vibe.includes(o)?' sel-m':''}" data-f="vibe" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
-    <div class="mfield"><label>Ocasião</label><div class="mchips">${OCASIOES.map(o=>`<span class="mchip${d.ocasiao.includes(o)?' sel-m':''}" data-f="ocasiao" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
-    <div class="mfield"><label>Preço</label><div class="mchips">${PRECOS.map(o=>`<span class="mchip${d.preco===o?' sel':''}" data-f="preco" data-v="${o}" onclick="togS(this)">${o}</span>`).join('')}</div></div>
-    <div class="mfield"><label>Visitado?</label><div class="mchips">
-      <span class="mchip${d.v?' sel':''}" data-f="v" data-v="true" onclick="togS(this)">Sim ✓</span>
-      <span class="mchip${!d.v?' sel':''}" data-f="v" data-v="false" onclick="togS(this)">Não</span>
-    </div></div>
-    <div class="mfield"><label>Nota</label><div class="mstars">${[1,2,3,4,5].map(s=>`<span class="mstar${s<=(d.r||0)?' on':''}" onclick="setStars(${s})">★</span>`).join('')}</div></div>
+    <div class="mfield"><label>Status</label><div class="mchips">${STATUS_OPTS.map(o=>`<span class="mchip${d.status.includes(o)?' sel-m':''}" data-f="status" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
+    <div class="mfield"><label>Período</label><div class="mchips">${['café/brunch','almoço','jantar','ambos'].map(o=>`<span class="mchip${d.periodo.includes(o)?' sel-m':''}" data-f="periodo" data-v="${o}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
+    <div class="mfield"><label>Vibe</label><div class="mchips">${vibesAll.map(o=>`<span class="mchip${d.vibe.includes(o)?' sel-m':''}" data-f="vibe" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div>
+      <input class="vibe-free" id="m-vibe-custom" value="${d.vibeCustom||''}" placeholder="Vibe personalizada (opcional)"></div>
+    <div class="mfield"><label>Companhia</label><div class="mchips">${COMPANHIAS.map(o=>`<span class="mchip${d.companhia.includes(o)?' sel-m':''}" data-f="companhia" data-v="${o}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
+    <div class="mfield"><label>Preço</label><div class="mchips">${PRECOS.map(o=>`<span class="mchip${d.preco===o?' sel':''}" data-f="preco" data-v="${esc(o)}" onclick="togS(this)">${o}</span>`).join('')}</div></div>
+    <div class="mfield"><label>Nota (0–10)</label>
+      <div class="score-wrap">
+        <input type="range" class="score-slider" id="m-score" min="0" max="10" value="${d.r||0}" oninput="document.getElementById('m-score-val').textContent=this.value">
+        <span class="score-val" id="m-score-val">${d.r||0}</span>
+      </div></div>
+    <div class="mfield"><label>Prioridade</label>
+      <div class="priority-toggle${d.priority?' on':''}" id="priority-toggle" onclick="togglePriority()">
+        <span class="priority-toggle-label">Destacar este lugar</span>
+        <span class="priority-toggle-icon">${d.priority?'★':'☆'}</span>
+      </div></div>
     <div class="mfield"><label>Observação</label><textarea id="m-obs" placeholder="ex: pedir a burrata, só com reserva...">${d.obs||''}</textarea></div>`;
   document.getElementById('modal-footer').innerHTML=
     (!isNew?`<button class="m-act m-act-danger" onclick="delPlace(${d.id})">Excluir</button>`:'')
@@ -545,6 +646,13 @@ function showModal(r){
   setTimeout(()=>document.getElementById('modal').classList.add('show'),10);
   setTimeout(()=>document.getElementById('m-n').focus(),350);
 }
+
+function togglePriority(){
+  window._md.priority=!window._md.priority;
+  const el=document.getElementById('priority-toggle');
+  el.classList.toggle('on',window._md.priority);
+  el.querySelector('.priority-toggle-icon').textContent=window._md.priority?'★':'☆';
+}
 function togM(el){
   const f=el.dataset.f,v=el.dataset.v,arr=window._md[f];
   const i=arr.indexOf(v);if(i>-1)arr.splice(i,1);else arr.push(v);
@@ -553,13 +661,7 @@ function togM(el){
 function togS(el){
   const f=el.dataset.f,v=el.dataset.v;
   el.closest('.mchips').querySelectorAll('.mchip').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');
-  window._md[f]=v==='true'?true:v==='false'?false:v;
-}
-function setStars(s){
-  document.querySelectorAll('.mstar').forEach((el,i)=>el.classList.toggle('on',i<s));
-  window._md.r=s;
-  if(s>0){window._md.v=true;document.querySelectorAll('[data-f="v"]').forEach(el=>el.classList.toggle('sel',el.dataset.v==='true'));}
+  el.classList.add('sel');window._md[f]=v;
 }
 function setCid(c){document.getElementById('m-cidade').value=c;window._md.cidade=c;}
 function updCidSugs(val){
@@ -576,12 +678,17 @@ function saveModal(){
   const nome=document.getElementById('m-n').value.trim();if(!nome)return;
   const md=window._md;
   const obj={n:nome,c:document.getElementById('m-c').value,
+    tipo:md.tipo||'Restaurante',
     cidade:document.getElementById('m-cidade').value.trim()||'São Paulo',
-    v:md.v===true||md.v==='true',r:md.r||0,
+    status:md.status.length?md.status:['Quero conhecer'],
+    r:parseInt(document.getElementById('m-score').value)||0,
     periodo:md.periodo.length?md.periodo:['jantar'],
-    vibe:md.vibe.length?md.vibe:['casual'],
-    ocasiao:md.ocasiao.length?md.ocasiao:['amigos'],
-    preco:md.preco||'$$',obs:document.getElementById('m-obs').value.trim()};
+    vibe:md.vibe.length?md.vibe:['Casual'],
+    vibeCustom:document.getElementById('m-vibe-custom').value.trim(),
+    companhia:md.companhia.length?md.companhia:['Turma'],
+    preco:md.preco||'Bom preço',
+    obs:document.getElementById('m-obs').value.trim(),
+    priority:md.priority||false};
   if(editId===null){obj.id=nextId++;data.push(obj);}
   else{const i=data.findIndex(r=>r.id===editId);if(i>-1)data[i]={...data[i],...obj};}
   save();closeModal();buildAll();
@@ -590,7 +697,6 @@ function delPlace(id){
   if(!confirm('Excluir?'))return;
   data=data.filter(r=>r.id!==id);save();closeModal();buildAll();
 }
-
 function buildAll(){buildCats();buildFilters();render();}
 document.getElementById('search').addEventListener('input',e=>{search=e.target.value;render();});
 buildAll();

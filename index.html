@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -184,8 +185,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);paddi
 </div>
 
 <script>
-const CATS=["Pizza","Hambúrguer","Massa","Frutos do mar","Japonês","Asiático","Carnes","Bar & Boteco","Café & Padaria","Sobremesa","Delivery","Outros"];
-const CAT_COLOR={"Pizza":"#E8622A","Hambúrguer":"#C0392B","Massa":"#8E44AD","Frutos do mar":"#2980B9","Japonês":"#E74C3C","Asiático":"#C0392B","Carnes":"#7D3C98","Bar & Boteco":"#D4AC0D","Café & Padaria":"#27AE60","Sobremesa":"#E91E8C","Delivery":"#E67E22","Outros":"#555"};
+const CATS=["Pizza","Hambúrguer","Massa","Frutos do mar","Japonês","Asiático","Carnes","Contemporânea","Bar & Boteco","Café & Padaria","Sobremesa","Delivery","Outros"];
+const CAT_COLOR={"Pizza":"#E8622A","Hambúrguer":"#C0392B","Massa":"#8E44AD","Frutos do mar":"#2980B9","Japonês":"#E74C3C","Asiático":"#C0392B","Carnes":"#7D3C98","Contemporânea":"#1A7F6E","Bar & Boteco":"#D4AC0D","Café & Padaria":"#27AE60","Sobremesa":"#E91E8C","Delivery":"#E67E22","Outros":"#555"};
 const TIPOS=["Restaurante","Bar & Boteco","Bar sofisticado","Café","Delivery","Take away"];
 const VIBES_DEFAULT=["Casual","Animado","Date","Romântico","Boteco","Ocasião especial"];
 const COMPANHIAS=["Solo","A dois","Turma","Família"];
@@ -193,9 +194,8 @@ const PRECOS=["Barato","Bom preço","Mid","Caro","Muito caro"];
 const STATUS_OPTS=["Quero conhecer","Já fui","Quero voltar","Não voltaria"];
 const STATUS_STYLE={"Quero conhecer":"spill-quer","Já fui":"spill-foi","Quero voltar":"spill-volta","Não voltaria":"spill-nao"};
 
-// migrate old vibe
 function migrateVibe(v){
-  if(!v)return["Casual"];
+  if(!v)return[];
   const m={"casual":"Casual","animado":"Animado","romântico":"Romântico","bar diurno":"Boteco","bar noturno":"Animado","especial":"Ocasião especial","romantico":"Romântico"};
   if(Array.isArray(v))return[...new Set(v.map(x=>m[x]||x))];
   return[m[v]||v];
@@ -406,33 +406,24 @@ const DEFAULT=[
   {n:"Brim",c:"Café & Padaria",tipo:"Café",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["café/brunch","almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
   {n:"A Galeteria",c:"Delivery",tipo:"Delivery",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
   {n:"Seu Osnir",c:"Delivery",tipo:"Delivery",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
-  {n:"Tartelier",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
-  {n:"Estou Quituteria",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
-  {n:"Bachir",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"sorvete árabe",priority:false,vibeCustom:""},
-  {n:"Mirá Padaria",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:["almoço","jantar"],vibe:["Casual"],companhia:["Turma"],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Tartelier",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:[],vibe:[],companhia:[],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Estou Quituteria",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui"],r:8,periodo:[],vibe:[],companhia:[],preco:"Barato",obs:"",priority:false,vibeCustom:""},
+  {n:"Bachir",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Já fui","Quero voltar"],r:10,periodo:[],vibe:[],companhia:[],preco:"Barato",obs:"sorvete árabe",priority:false,vibeCustom:""},
+  {n:"Mirá Padaria",c:"Sobremesa",tipo:"Restaurante",cidade:"São Paulo",status:["Quero conhecer"],r:0,periodo:[],vibe:[],companhia:[],preco:"Barato",obs:"",priority:false,vibeCustom:""},
 ];
 
-const KEY='comidas_v6';
+const KEY='comidas_v7';
 let data=JSON.parse(localStorage.getItem(KEY)||'null');
 if(!data){
-  // try migrate from v4
-  const old=JSON.parse(localStorage.getItem('comidas_v4')||'null');
+  const old=JSON.parse(localStorage.getItem('comidas_v6')||localStorage.getItem('comidas_v4')||'null');
   if(old){
     data=old.map(r=>({
-      n:r.n,
-      c:migrateCat(r.c),
-      tipo:migrateTipo(r.c),
-      cidade:r.cidade||'São Paulo',
-      status:migrateStatus(r),
-      r:Math.min(10,(r.r||0)*2),
+      n:r.n,c:migrateCat(r.c),tipo:migrateTipo(r.c),cidade:r.cidade||'São Paulo',
+      status:migrateStatus(r),r:Math.min(10,(r.r||0)*2),
       periodo:Array.isArray(r.periodo)?r.periodo:[r.periodo||'jantar'],
-      vibe:migrateVibe(r.vibe),
-      vibeCustom:'',
+      vibe:migrateVibe(r.vibe),vibeCustom:'',
       companhia:migrateCompanhia(r.ocasiao),
-      preco:migratePreco(r.preco),
-      obs:r.obs||'',
-      priority:r.priority||false,
-      id:r.id,
+      preco:migratePreco(r.preco),obs:r.obs||'',priority:r.priority||false,id:r.id,
     }));
   } else {
     data=DEFAULT.map((d,i)=>({...d,id:i}));
@@ -440,9 +431,9 @@ if(!data){
 }
 data.forEach(r=>{
   if(!r.cidade)r.cidade='São Paulo';
-  if(!Array.isArray(r.periodo))r.periodo=[r.periodo||'jantar'];
-  if(!Array.isArray(r.vibe))r.vibe=['Casual'];
-  if(!Array.isArray(r.companhia))r.companhia=['Turma'];
+  if(!Array.isArray(r.periodo))r.periodo=[];
+  if(!Array.isArray(r.vibe))r.vibe=[];
+  if(!Array.isArray(r.companhia))r.companhia=[];
   if(!Array.isArray(r.status))r.status=['Quero conhecer'];
   if(r.obs===undefined)r.obs='';
   if(r.vibeCustom===undefined)r.vibeCustom='';
@@ -473,9 +464,9 @@ function importJSON(e){
       data=d;
       data.forEach(r=>{
         if(!r.cidade)r.cidade='São Paulo';
-        if(!Array.isArray(r.periodo))r.periodo=['jantar'];
-        if(!Array.isArray(r.vibe))r.vibe=['Casual'];
-        if(!Array.isArray(r.companhia))r.companhia=['Turma'];
+        if(!Array.isArray(r.periodo))r.periodo=[];
+        if(!Array.isArray(r.vibe))r.vibe=[];
+        if(!Array.isArray(r.companhia))r.companhia=[];
         if(!Array.isArray(r.status))r.status=['Quero conhecer'];
         if(r.obs===undefined)r.obs='';
         if(r.vibeCustom===undefined)r.vibeCustom='';
@@ -549,10 +540,11 @@ function filtered(){
     if(search&&!r.n.toLowerCase().includes(search.toLowerCase()))return false;
     if(filters.cidade.length&&!filters.cidade.includes(r.cidade||'São Paulo'))return false;
     if(filters.status.length&&!filters.status.some(f=>r.status.includes(f)))return false;
-    if(filters.periodo.length&&!filters.periodo.some(f=>r.periodo.includes(f)))return false;
-    if(filters.vibe.length&&!filters.vibe.some(f=>[...r.vibe,r.vibeCustom].includes(f)))return false;
-    if(filters.companhia.length&&!filters.companhia.some(f=>r.companhia.includes(f)))return false;
-    if(filters.tipo.length&&!filters.tipo.includes(r.tipo))return false;
+    if(filters.periodo.length&&r.periodo&&r.periodo.length&&!filters.periodo.some(f=>r.periodo.includes(f)))return false;
+    const allVibesF=[...(r.vibe||[]),r.vibeCustom].filter(Boolean);
+    if(filters.vibe.length&&allVibesF.length&&!filters.vibe.some(f=>allVibesF.includes(f)))return false;
+    if(filters.companhia.length&&r.companhia&&r.companhia.length&&!filters.companhia.some(f=>r.companhia.includes(f)))return false;
+    if(filters.tipo.length&&r.tipo&&!filters.tipo.includes(r.tipo))return false;
     if(filters.preco.length&&!filters.preco.includes(r.preco))return false;
     return true;
   });
@@ -580,11 +572,11 @@ function render(){
   if(!cnt){el.innerHTML=`<div class="empty">Nenhum lugar encontrado.</div>`;return;}
   el.innerHTML=list.map(r=>{
     const cc=CAT_COLOR[r.c]||'#555';
-    const allVibes=[...r.vibe,r.vibeCustom].filter(Boolean);
+    const allVibes=[...(r.vibe||[]),r.vibeCustom].filter(Boolean);
     const statusHtml=r.status.map(s=>`<span class="spill ${STATUS_STYLE[s]||''}">${s}</span>`).join('');
     const scoreHtml=r.r?`<span class="card-score">${r.r}/10</span>`:'';
     const cidTag=r.cidade&&r.cidade!=='São Paulo'?`<span class="ctag ctag-cidade">${r.cidade}</span>`:'';
-    const tags=[...r.periodo,...allVibes,...r.companhia,r.preco];
+    const tags=[...(r.periodo||[]),...allVibes,...(r.companhia||[]),r.preco].filter(Boolean);
     return`<div class="card${r.priority?' priority':''}" onclick="openEdit(${r.id})">
       <div class="card-stripe" style="background:${cc}"></div>
       <div class="card-body">
@@ -609,8 +601,8 @@ function openEdit(id){showModal(data.find(r=>r.id===id));}
 function showModal(r){
   const isNew=!r;
   editId=isNew?null:r.id;
-  const d=r||{n:'',c:'Outros',tipo:'Restaurante',cidade:'São Paulo',status:['Quero conhecer'],r:0,periodo:['jantar'],vibe:['Casual'],vibeCustom:'',companhia:['Turma'],preco:'Bom preço',obs:'',priority:false};
-  window._md={...d,status:[...d.status],periodo:[...d.periodo],vibe:[...d.vibe],companhia:[...d.companhia]};
+  const d=r||{n:'',c:'Outros',tipo:'Restaurante',cidade:'São Paulo',status:['Quero conhecer'],r:0,periodo:[],vibe:[],vibeCustom:'',companhia:[],preco:'Bom preço',obs:'',priority:false};
+  window._md={...d,status:[...d.status],periodo:[...(d.periodo||[])],vibe:[...(d.vibe||[])],companhia:[...(d.companhia||[])]};
   document.getElementById('modal-title').textContent=isNew?'Novo lugar':'Editar lugar';
   const cids=getCidades();
   const vibesAll=getVibes();
@@ -622,10 +614,10 @@ function showModal(r){
       <input id="m-cidade" value="${d.cidade||'São Paulo'}" placeholder="São Paulo" oninput="updCidSugs(this.value)">
       <div class="cidade-sugs" id="cid-sugs">${cids.map(c=>`<button class="csug" onclick="setCid('${esc(c)}')">${c}</button>`).join('')}</div></div>
     <div class="mfield"><label>Status</label><div class="mchips">${STATUS_OPTS.map(o=>`<span class="mchip${d.status.includes(o)?' sel-m':''}" data-f="status" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
-    <div class="mfield"><label>Período</label><div class="mchips">${['café/brunch','almoço','jantar','ambos'].map(o=>`<span class="mchip${d.periodo.includes(o)?' sel-m':''}" data-f="periodo" data-v="${o}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
-    <div class="mfield"><label>Vibe</label><div class="mchips">${vibesAll.map(o=>`<span class="mchip${d.vibe.includes(o)?' sel-m':''}" data-f="vibe" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div>
+    <div class="mfield"><label>Período <span style="color:var(--text3);font-weight:400;text-transform:none">(opcional)</span></label><div class="mchips">${['café/brunch','almoço','jantar','ambos'].map(o=>`<span class="mchip${(d.periodo||[]).includes(o)?' sel-m':''}" data-f="periodo" data-v="${o}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
+    <div class="mfield"><label>Vibe <span style="color:var(--text3);font-weight:400;text-transform:none">(opcional)</span></label><div class="mchips">${vibesAll.map(o=>`<span class="mchip${(d.vibe||[]).includes(o)?' sel-m':''}" data-f="vibe" data-v="${esc(o)}" onclick="togM(this)">${o}</span>`).join('')}</div>
       <input class="vibe-free" id="m-vibe-custom" value="${d.vibeCustom||''}" placeholder="Vibe personalizada (opcional)"></div>
-    <div class="mfield"><label>Companhia</label><div class="mchips">${COMPANHIAS.map(o=>`<span class="mchip${d.companhia.includes(o)?' sel-m':''}" data-f="companhia" data-v="${o}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
+    <div class="mfield"><label>Companhia <span style="color:var(--text3);font-weight:400;text-transform:none">(opcional)</span></label><div class="mchips">${COMPANHIAS.map(o=>`<span class="mchip${(d.companhia||[]).includes(o)?' sel-m':''}" data-f="companhia" data-v="${o}" onclick="togM(this)">${o}</span>`).join('')}</div></div>
     <div class="mfield"><label>Preço</label><div class="mchips">${PRECOS.map(o=>`<span class="mchip${d.preco===o?' sel':''}" data-f="preco" data-v="${esc(o)}" onclick="togS(this)">${o}</span>`).join('')}</div></div>
     <div class="mfield"><label>Nota (0–10)</label>
       <div class="score-wrap">
@@ -680,12 +672,12 @@ function saveModal(){
   const obj={n:nome,c:document.getElementById('m-c').value,
     tipo:md.tipo||'Restaurante',
     cidade:document.getElementById('m-cidade').value.trim()||'São Paulo',
-    status:md.status.length?md.status:['Quero conhecer'],
+    status:md.status&&md.status.length?md.status:['Quero conhecer'],
     r:parseInt(document.getElementById('m-score').value)||0,
-    periodo:md.periodo.length?md.periodo:['jantar'],
-    vibe:md.vibe.length?md.vibe:['Casual'],
+    periodo:md.periodo||[],
+    vibe:md.vibe||[],
     vibeCustom:document.getElementById('m-vibe-custom').value.trim(),
-    companhia:md.companhia.length?md.companhia:['Turma'],
+    companhia:md.companhia||[],
     preco:md.preco||'Bom preço',
     obs:document.getElementById('m-obs').value.trim(),
     priority:md.priority||false};
@@ -703,3 +695,4 @@ buildAll();
 </script>
 </body>
 </html>
+```

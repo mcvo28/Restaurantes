@@ -495,8 +495,8 @@ function savePrefs(){localStorage.setItem(PREF_KEY,JSON.stringify(prefs));}
 function getCidades(){return[...new Set(data.map(r=>r.cidade||'São Paulo'))].sort();}
 function getAllCats(){return[...CATS_DEFAULT,...prefs.catsCustom.filter(c=>!CATS_DEFAULT.includes(c))];}
 function getAllVibes(){return[...VIBES_DEFAULT,...prefs.vibesCustom.filter(v=>!VIBES_DEFAULT.includes(v))];}
-function getCatColor(c){return CAT_COLOR_MAP[c]||'#6C6C6C';}
-function getCatIcon(c){return CAT_ICON[c]||'🍽';}
+function getCatColor(c){return(prefs.catsColors&&prefs.catsColors[c])||CAT_COLOR_MAP[c]||'#6C6C6C';}
+function getCatIcon(c){return(prefs.catsIcons&&prefs.catsIcons[c])||CAT_ICON[c]||'🍽';}
 function esc(s){return String(s).replace(/'/g,"\\'");}
 function filterCount(){return Object.values(filters).reduce((s,a)=>s+a.length,0);}
 
@@ -514,6 +514,8 @@ function importJSON(e){
       if(!Array.isArray(d))throw 0;
       data=d;
       if(parsed.prefs)prefs=parsed.prefs;
+      if(!prefs.catsColors)prefs.catsColors={};
+if(!prefs.catsIcons)prefs.catsIcons={};
       data.forEach(r=>{
         if(!r.cidade)r.cidade='São Paulo';
         if(!Array.isArray(r.periodo))r.periodo=[];
@@ -552,7 +554,7 @@ function buildHome(){
     const color=c==='Todos'?'#2C2C2E':getCatColor(c);
     const icon=c==='Todos'?'🗺':getCatIcon(c);
     const cnt=c==='Todos'?data.length:data.filter(r=>r.c===c).length;
-    if(cnt===0&&c!=='Todos')return'';
+    if(cnt===0&&c!=='Todos'&&!prefs.catsCustom.includes(c))return'';
     const isTodos=c==='Todos';
     return`<div class="cat-card${isTodos?' cat-card-todos':''}" style="background:linear-gradient(135deg,${color}dd,${color}88)" onclick="openCat('${esc(c)}')">
       <div>
@@ -660,10 +662,61 @@ function addCustom(){
   const arr=isC?prefs.catsCustom:prefs.vibesCustom;
   const defaults=isC?CATS_DEFAULT:VIBES_DEFAULT;
   const hidden=isC?(prefs.catsHidden||[]):(prefs.vibesHidden||[]);
-  // se estava oculta, restaura
-  if(hidden.includes(val)){restoreCustom(val);return;}
-  if(!arr.includes(val)&&!defaults.includes(val))arr.push(val);
-  savePrefs();input.value='';buildManageBody();
+  if(hidden.includes(val)){restoreCustom(val);input.value='';return;}
+  if(arr.includes(val)||defaults.includes(val)){input.value='';return;}
+  if(!isC){arr.push(val);savePrefs();input.value='';buildManageBody();if(inListView)buildFilters();else buildHome();return;}
+  // para categorias: abre seletor de cor e ícone
+  openCatCustomizer(val);
+}
+
+function openCatCustomizer(nome){
+  const CORES=['#E8622A','#C0392B','#8E44AD','#2980B9','#E74C3C','#E67E22','#7D3C98','#1A7F6E','#D4AC0D','#27AE60','#E91E8C','#2C3E50','#16A085','#D35400','#6C3483'];
+  const ICONS=['🍕','🍔','🍝','🦞','🍣','🥢','🥩','✨','🍺','☕','🍨','📦','🍽','🥗','🌮','🍜','🫕','🥘','🍱','🥩','🍷','🧁','🍰','🥐','🌯'];
+  let selColor=CORES[0];let selIcon=ICONS[0];
+  const bd=document.createElement('div');
+  bd.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)';
+  bd.innerHTML=`<div onclick="event.stopPropagation()" style="background:#1C1C1E;border-radius:20px 20px 0 0;padding:20px;width:100%;max-height:80vh;overflow-y:auto;padding-bottom:36px">
+    <div style="width:36px;height:4px;background:#3A3A3C;border-radius:2px;margin:0 auto 16px"></div>
+    <div style="font-size:17px;font-weight:700;margin-bottom:16px">Personalizar "${nome}"</div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#48484A;margin-bottom:10px">Cor</div>
+    <div id="cust-colors" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
+      ${CORES.map((c,i)=>`<div onclick="selCustColor('${c}',this)" data-color="${c}" style="width:36px;height:36px;border-radius:50%;background:${c};cursor:pointer;border:3px solid ${i===0?'#fff':'transparent'};transition:border-color .15s"></div>`).join('')}
+    </div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#48484A;margin-bottom:10px">Ícone</div>
+    <div id="cust-icons" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+      ${ICONS.map((ic,i)=>`<div onclick="selCustIcon('${ic}',this)" data-icon="${ic}" style="width:44px;height:44px;border-radius:12px;background:#2C2C2E;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;border:2px solid ${i===0?'#E8622A':'transparent'};transition:border-color .15s">${ic}</div>`).join('')}
+    </div>
+    <div style="display:flex;gap:10px">
+      <button onclick="document.body.removeChild(document.getElementById('cat-customizer'))" style="flex:1;padding:14px;border-radius:13px;font-size:16px;font-weight:600;border:none;background:#2C2C2E;color:#8E8E93;cursor:pointer;font-family:'Inter',sans-serif">Cancelar</button>
+      <button onclick="confirmCatCustomizer('${nome.replace(/'/g,"\\'")}',document.getElementById('cat-customizer'))" style="flex:1;padding:14px;border-radius:13px;font-size:16px;font-weight:600;border:none;background:#E8622A;color:#fff;cursor:pointer;font-family:'Inter',sans-serif">Adicionar</button>
+    </div>
+  </div>`;
+  bd.id='cat-customizer';
+  bd.onclick=()=>document.body.removeChild(bd);
+  document.body.appendChild(bd);
+  window._custColor=CORES[0];window._custIcon=ICONS[0];
+}
+function selCustColor(c,el){
+  window._custColor=c;
+  document.querySelectorAll('#cust-colors div').forEach(d=>d.style.borderColor='transparent');
+  el.style.borderColor='#fff';
+}
+function selCustIcon(ic,el){
+  window._custIcon=ic;
+  document.querySelectorAll('#cust-icons div').forEach(d=>d.style.borderColor='transparent');
+  el.style.borderColor='#E8622A';
+}
+function confirmCatCustomizer(nome,bd){
+  if(!prefs.catsCustom)prefs.catsCustom=[];
+  if(!prefs.catsColors)prefs.catsColors={};
+  if(!prefs.catsIcons)prefs.catsIcons={};
+  prefs.catsCustom.push(nome);
+  prefs.catsColors[nome]=window._custColor;
+  prefs.catsIcons[nome]=window._custIcon;
+  savePrefs();
+  document.body.removeChild(bd);
+  const inp=document.getElementById('manage-input');if(inp)inp.value='';
+  buildManageBody();
   if(inListView)buildFilters();else buildHome();
 }
 function removeCustom(val){
@@ -740,7 +793,8 @@ function render(){
     const scoreHtml=r.r?`<span class="card-score">${r.r}/10</span>`:'';
     const cidTag=r.cidade&&r.cidade!=='São Paulo'?`<span class="ctag ctag-cidade">${r.cidade}</span>`:'';
     const barTag=r.barTipo?`<span class="ctag">${r.barTipo}</span>`:'';
-    const tags=[...(r.periodo||[]),...allVibes,...(r.companhia||[]),r.preco].filter(Boolean);
+    const isQC=r.status.length===1&&r.status[0]==='Quero conhecer';
+const tags=isQC?[]:[...(r.periodo||[]),...allVibes,...(r.companhia||[]),r.preco].filter(Boolean);
     return`<div class="card${r.priority?' priority':''}" onclick="openEdit(${r.id})">
       <div class="card-stripe" style="background:${cc}"></div>
       <div class="card-body">

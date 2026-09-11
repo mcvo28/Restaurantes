@@ -217,6 +217,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);paddi
   <label class="menu-item" style="cursor:pointer">↑ Importar backup (.json)
     <input type="file" accept=".json" style="display:none" onchange="importJSON(event);closeMenu()">
   </label>
+  <button class="menu-item" onclick="syncToSupabase();closeMenu()">☁ Sincronizar com nuvem</button>
+  <button class="menu-item" onclick="loadFromSupabase();closeMenu()">↓ Carregar da nuvem</button>
   <button class="menu-item" id="menu-manage-cats" onclick="openManageCategories();closeMenu()">✎ Gerenciar categorias</button>
   <button class="menu-item" id="menu-manage-vibes" onclick="openManageVibes();closeMenu()" style="display:none">✎ Gerenciar vibes</button>
   <div class="menu-spacer"></div>
@@ -1078,8 +1080,133 @@ document.getElementById('search').addEventListener('input',e=>{
   if(inListView)render();
 });
 
+
+// ── SUPABASE CONFIG ───────────────────────────────────────────────────────────
+const SUPA_URL = 'https://recctepnilahhydtwgfg.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlY2N0ZXBuaWxhaGh5ZHR3Z2ZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2NDYyODIsImV4cCI6MjEwNDIyMjI4Mn0.XjrpgqiQfb-kacu0nmTrQ0-4iBAQj5872ws2a_LN9Ow';
+const APP_PASSWORD = 'Mcs209001*';
+const AUTH_KEY = 'eat_drink_auth';
+
+async function supaFetch(table, method='GET', body=null){
+  const opts = {
+    method,
+    headers: {
+      'apikey': SUPA_KEY,
+      'Authorization': 'Bearer ' + SUPA_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': method==='POST' ? 'return=representation' : ''
+    }
+  };
+  if(body) opts.body = JSON.stringify(body);
+  const res = await fetch(`${SUPA_URL}/rest/v1/${table}`, opts);
+  if(!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+async function supaUpsert(table, data){
+  // check if row exists
+  const rows = await supaFetch(`${table}?select=id&limit=1`);
+  if(rows && rows.length > 0){
+    const id = rows[0].id;
+    await supaFetch(`${table}?id=eq.${id}`, 'PATCH', {data, updated_at: new Date().toISOString()});
+  } else {
+    await supaFetch(table, 'POST', {data, updated_at: new Date().toISOString()});
+  }
+}
+
+async function supaLoad(table){
+  const rows = await supaFetch(`${table}?select=data&limit=1`);
+  if(rows && rows.length > 0) return rows[0].data;
+  return null;
+}
+
+async function syncToSupabase(){
+  try {
+    await Promise.all([
+      supaUpsert('restaurantes', restData),
+      supaUpsert('vinhos', wineData),
+      supaUpsert('whiskies', whisData),
+      supaUpsert('prefs', prefs),
+    ]);
+    showSyncStatus('✓ Sincronizado', '#34C759');
+  } catch(e) {
+    console.error('Sync error:', e);
+    showSyncStatus('✗ Erro ao sincronizar', '#FF3B30');
+  }
+}
+
+async function loadFromSupabase(){
+  try {
+    const [r, w, wh, p] = await Promise.all([
+      supaLoad('restaurantes'),
+      supaLoad('vinhos'),
+      supaLoad('whiskies'),
+      supaLoad('prefs'),
+    ]);
+    if(r){ restData=r; saveRest(); }
+    if(w){ wineData=w; saveWine(); }
+    if(wh){ whisData=wh; saveWhis(); }
+    if(p){ prefs=p; savePrefs(); }
+    goHome();
+    showSyncStatus('✓ Dados carregados', '#34C759');
+  } catch(e) {
+    console.error('Load error:', e);
+    showSyncStatus('✗ Erro ao carregar', '#FF3B30');
+  }
+}
+
+function showSyncStatus(msg, color){
+  let el = document.getElementById('sync-status');
+  if(!el){ el=document.createElement('div'); el.id='sync-status';
+    el.style.cssText='position:fixed;top:60px;right:12px;padding:6px 12px;border-radius:10px;font-size:12px;font-weight:600;z-index:999;transition:opacity .5s';
+    document.body.appendChild(el); }
+  el.textContent=msg; el.style.background=color; el.style.color='#fff'; el.style.opacity='1';
+  setTimeout(()=>el.style.opacity='0', 3000);
+}
+
+// ── AUTH ──────────────────────────────────────────────────────────────────────
+function checkAuth(){
+  return sessionStorage.getItem(AUTH_KEY) === 'ok';
+}
+function showLoginScreen(){
+  const div = document.createElement('div');
+  div.id = 'login-screen';
+  div.style.cssText = 'position:fixed;inset:0;background:#111;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;font-family:Inter,sans-serif';
+  div.innerHTML = `
+    <div style="font-size:48px;margin-bottom:16px">🍽</div>
+    <div style="font-size:24px;font-weight:700;color:#F2F2F7;margin-bottom:6px">Eat & Drink</div>
+    <div style="font-size:14px;color:#8E8E93;margin-bottom:40px">Acesso restrito</div>
+    <input id="pw-input" type="password" placeholder="Senha" autocomplete="current-password"
+      style="width:100%;max-width:320px;background:#1C1C1E;border:1.5px solid #3A3A3C;border-radius:14px;color:#F2F2F7;padding:14px 18px;font-size:16px;font-family:Inter,sans-serif;outline:none;margin-bottom:12px;text-align:center"
+      onkeydown="if(event.key==='Enter')doLogin()">
+    <button onclick="doLogin()"
+      style="width:100%;max-width:320px;background:#E8622A;border:none;border-radius:14px;color:#fff;padding:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;margin-bottom:12px">
+      Entrar
+    </button>
+    <div id="pw-error" style="color:#FF3B30;font-size:13px;display:none">Senha incorreta</div>`;
+  document.body.appendChild(div);
+  setTimeout(()=>document.getElementById('pw-input').focus(), 100);
+}
+function doLogin(){
+  const val = document.getElementById('pw-input').value;
+  if(val === APP_PASSWORD){
+    sessionStorage.setItem(AUTH_KEY, 'ok');
+    document.getElementById('login-screen').remove();
+    initApp();
+  } else {
+    document.getElementById('pw-error').style.display='block';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+
 // ── INIT ──────────────────────────────────────────────────────────────────────
-buildHome();
+function initApp(){
+  // try load from supabase on first run
+  const hasLocal = localStorage.getItem(REST_KEY);
+  if(!hasLocal){ loadFromSupabase(); } else { buildHome(); }
+}
+if(checkAuth()){ initApp(); } else { showLoginScreen(); }
 </script>
 </body>
 </html>

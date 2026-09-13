@@ -916,7 +916,7 @@ function saveRestModal(nome,md){
     barTipo:md.barTipo||'',
     cidade:(document.getElementById('m-cidade')?document.getElementById('m-cidade').value.trim():md.cidade)||'São Paulo',
     status:md.status&&md.status.length?md.status:['Quero conhecer'],
-    r:isQC?0:(parseInt(document.getElementById('m-score')?document.getElementById('m-score').value:md.r)||0),
+    r:isQC?0:(parseFloat(document.getElementById('m-score')?document.getElementById('m-score').value:md.r)||0),
     periodo:isQC?[]:md.periodo||[],
     vibe:isQC?[]:md.vibe||[],
     vibeCustom:isQC?'':(document.getElementById('m-vibe-custom')?document.getElementById('m-vibe-custom').value.trim():md.vibeCustom||''),

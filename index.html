@@ -660,7 +660,7 @@ function renderRest(){
     const tags=isQC?[]:[...(r.periodo||[]),...allVibes,...(r.companhia||[]),r.preco].filter(Boolean);
     const barTag=!isQC&&r.barTipo?`<span class="ctag">${r.barTipo}</span>`:'';
     const cidTag=r.cidade&&r.cidade!=='São Paulo'?`<span class="ctag ctag-dest">${r.cidade}</span>`:'';
-    const scoreHtml=!isQC&&r.r?`<span class="card-score">${r.r}/10</span>`:'';
+    const scoreHtml=!isQC&&r.r?`<span class="card-score">${Number(r.r).toFixed(1)}/10</span>`:'';
     return`<div class="card${r.priority?' priority':''}" onclick="openEdit(${r.id})">
       <div class="card-stripe" style="background:${cc}"></div>
       <div class="card-body">
@@ -810,8 +810,8 @@ function renderRestModalBody(){
       <div class="mfield"><label>Preço</label><div class="mchips">${REST_PRECOS.map(o=>`<span class="mchip${d.preco===o?' sel':''}" data-f="preco" data-v="${esc(o)}" onclick="togS(this)">${o}</span>`).join('')}</div></div>
       <div class="mfield"><label>Nota (0–10)</label>
         <div class="score-wrap">
-          <input type="range" class="score-slider" id="m-score" min="0" max="10" step="1" value="${d.r||0}" oninput="document.getElementById('m-score-val').textContent=this.value;window._md.r=parseInt(this.value)">
-          <span class="score-val" id="m-score-val">${d.r||0}</span>
+          <input type="range" class="score-slider" id="m-score" min="0" max="10" step="0.5" value="${d.r||0}" oninput="document.getElementById('m-score-val').textContent=parseFloat(this.value).toFixed(1);window._md.r=parseFloat(this.value)">
+          <span class="score-val" id="m-score-val">${Number(d.r||0).toFixed(1)}</span>
         </div>
       </div>
       <div class="mfield"><label>Prioridade</label>
